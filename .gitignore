@@ -1,0 +1,67 @@
+# .gitignore for dlc-pose-estimation
+# Ignore common Python, Jupyter, macOS, IDE, and DeepLabCut/model outputs
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+env/
+venv/
+.venv/
+ENV/
+.env/
+
+# Conda environments (local)
+.conda/
+
+# Jupyter Notebook checkpoints and outputs
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+# DeepLabCut / model outputs and large artifacts
+results/
+models/
+snapshots/
+*.h5
+*_snapshot_*.h5
+*.ckpt
+*.csv
+*.pickle
+*.pkl
+*.mat
+
+# Data directories (large datasets). Remove if you intentionally track them
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Logs and temporary files
+*.log
+*.tmp
+tmp/
+temp/
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+
+# Coverage, test artifacts
+htmlcov/
+.coverage
+
+# Sphinx build
+_build/
+
+# If you want to track any of the above, remove the corresponding line(s).
