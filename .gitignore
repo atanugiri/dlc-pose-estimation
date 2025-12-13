@@ -31,6 +31,7 @@ snapshots/
 *.pickle
 *.pkl
 *.mat
+*.zip*
 
 # Data directories (large datasets). Remove if you intentionally track them
 
