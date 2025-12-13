@@ -33,7 +33,20 @@ snapshots/
 *.mat
 *.zip*
 
-# Data directories (large datasets). Remove if you intentionally track them
+# DeepLabCut specific files
+evaluation-results/
+training-datasets/
+*.yaml.bak
+config.yaml.bak
+*.avi
+*.mp4
+*.mov
+*.m4v
+
+# Large data files
+*.tar.gz
+*.7z
+*.rar
 
 # macOS
 .DS_Store
