@@ -19,11 +19,21 @@ engine: pytorch
 video_sets:
   /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Cyan.mp4:
     crop: 0, 360, 0, 288
+  ? /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Orange.mp4
+  : crop: 0, 360, 0, 288
+  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Teal.mp4:
+    crop: 0, 360, 0, 288
+  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Azul.mp4:
+    crop: 0, 360, 0, 288
+  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Navy.mp4:
+    crop: 0, 360, 0, 288
 bodyparts:
-- bodypart1
-- bodypart2
-- bodypart3
-- objectA
+- Head
+- Neck
+- Tailbase
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
 
 
 # Fraction of video to start/stop when extracting frames for labeling/refinement
@@ -34,10 +44,10 @@ numframes2pick: 20
 
 # Plotting configuration
 skeleton:
-- - bodypart1
-  - bodypart2
-- - objectA
-  - bodypart3
+- - Head
+  - Neck
+- - Head
+  - Tailbase
 skeleton_color: black
 pcutoff: 0.6
 dotsize: 12
