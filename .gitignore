@@ -32,6 +32,7 @@ snapshots/
 *.pkl
 *.mat
 *.zip*
+*.png
 
 # DeepLabCut specific files
 evaluation-results/

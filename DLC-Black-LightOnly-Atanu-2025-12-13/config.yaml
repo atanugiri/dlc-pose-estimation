@@ -18,15 +18,15 @@ engine: pytorch
 # Annotation data set configuration (and individual video cropping parameters)
 video_sets:
   /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Cyan.mp4:
-    crop: 0, 360, 0, 288
+    crop: 33, 301, 18, 282
   ? /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Orange.mp4
-  : crop: 0, 360, 0, 288
+  : crop: 49, 317, 10, 277
   /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Teal.mp4:
-    crop: 0, 360, 0, 288
+    crop: 63, 319, 17, 272
   /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Azul.mp4:
-    crop: 0, 360, 0, 288
+    crop: 59, 317, 17, 270
   /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Navy.mp4:
-    crop: 0, 360, 0, 288
+    crop: 48, 318, 10, 278
 bodyparts:
 - Head
 - Neck
@@ -37,9 +37,12 @@ bodyparts:
 
 
 # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
 start: 0
 stop: 1
-numframes2pick: 20
+numframes2pick: 5
 
 
 # Plotting configuration
@@ -50,7 +53,7 @@ skeleton:
   - Tailbase
 skeleton_color: black
 pcutoff: 0.6
-dotsize: 12
+dotsize: 6
 alphavalue: 0.7
 colormap: rainbow
 
