@@ -27,6 +27,7 @@ snapshots/
 *.h5
 *_snapshot_*.h5
 *.ckpt
+*.pt
 *.csv
 *.pickle
 *.pkl
