@@ -15,9 +15,9 @@ CONFIG_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/config.yaml"
 CONDA_ENV="$SCRATCH/miniconda3/envs/dlcfix"
 DEVICE="cuda:0"
 EPOCHS=500
-SHUFFLE=1
+SHUFFLE=2
 TRAININGSETINDEX=0
-
+SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-2/DLC-Black-LightOnlyDec13-trainset95shuffle1/train/snapshot-best-410.pt"
 echo "Job started on $(hostname) at $(date)"
 
 # Initialize environment
@@ -33,18 +33,18 @@ cd "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13"
 python <<EOF
 import deeplabcut
 
-# deeplabcut.train_network(
-#     "$CONFIG_PATH",
-#     shuffle=$SHUFFLE,
-#     trainingsetindex=$TRAININGSETINDEX,
-#     device="$DEVICE",
-#     max_snapshots_to_keep=5,
-#     displayiters=100,
-#     save_epochs=5,
-#     epochs=$EPOCHS,
-#     batch_size=8,
-#     snapshot_path="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-0/DLC-Black-LightOnlyDec13-trainset95shuffle1/train/snapshot-best-050.pt"
-# )
+deeplabcut.train_network(
+    "$CONFIG_PATH",
+    shuffle=$SHUFFLE,
+    trainingsetindex=$TRAININGSETINDEX,
+    device="$DEVICE",
+    max_snapshots_to_keep=5,
+    displayiters=100,
+    save_epochs=5,
+    epochs=$EPOCHS,
+    batch_size=8,
+    snapshot_path="$SNAPSHOT_PATH"
+)
 
 # deeplabcut.evaluate_network(
 #     "$CONFIG_PATH",
@@ -54,16 +54,16 @@ import deeplabcut
 #     plotting=True
 # )
 
-deeplabcut.analyze_videos(
-    "$CONFIG_PATH",
-    ["$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Cyan.mp4", 
-    "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Orange.mp4",
-    "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Teal.mp4",
-    "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Azul.mp4"],
-    shuffle=$SHUFFLE,
-    trainingsetindex=$TRAININGSETINDEX,
-    gputouse="$DEVICE",
-)
+# deeplabcut.analyze_videos(
+#     "$CONFIG_PATH",
+#     ["$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Cyan.mp4", 
+#     "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Orange.mp4",
+#     "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Teal.mp4",
+#     "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Azul.mp4"],
+#     shuffle=$SHUFFLE,
+#     trainingsetindex=$TRAININGSETINDEX,
+#     gputouse="$DEVICE",
+# )
 
 # deeplabcut.filterpredictions(
 #     "$CONFIG_PATH",
