@@ -8,7 +8,7 @@ identity:
 
 # Project path (change when moving around)
 project_path: 
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13
+  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13
 
 
 # Default DeepLabCut engine to use for shuffle creation (either pytorch or tensorflow)
@@ -17,41 +17,46 @@ engine: pytorch
 
 # Annotation data set configuration (and individual video cropping parameters)
 video_sets:
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Cyan.mp4:
+  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Cyan.mp4:
     crop: 33, 298, 20, 280
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Orange.mp4:
-    crop: 49, 315, 13, 277
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Teal.mp4:
+  ? /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Orange.mp4
+  : crop: 49, 315, 13, 277
+  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Teal.mp4:
     crop: 64, 317, 17, 269
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Azul.mp4:
+  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Azul.mp4:
     crop: 63, 315, 17, 271
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Navy.mp4:
-    crop: 47, 316, 11, 277
-    
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Tan.mp4:
-    crop: 35, 298, 20, 280
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_19_24_S3Y_Indigo.mp4:
-    crop: 63, 318, 16, 270
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_19_24_S3Y_Lilac.mp4:
-    crop: 34, 299, 18, 281
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_19_24_S3Y_Violet.mp4:
-    crop: 48, 317, 13, 277
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_19_24_S4P_Pinky.mp4:
-    crop: 50, 316, 11, 277
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_19_24_S4P_Sage.mp4:
+  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Navy.mp4:
+    crop: 0, 360, 0, 288
+  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Tan.mp4:
+    crop: 0, 360, 0, 288
+  ? /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_19_24_S3Y_Indigo.mp4
+  : crop: 63, 318, 16, 270
+  ? /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_19_24_S3Y_Lilac.mp4
+  : crop: 34, 299, 18, 281
+  ? /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_19_24_S3Y_Violet.mp4
+  : crop: 48, 317, 13, 277
+  ? /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_19_24_S4P_Pinky.mp4
+  : crop: 50, 316, 11, 277
+  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_19_24_S4P_Sage.mp4:
     crop: 62, 316, 17, 270
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_19_24_S4P_Sky.mp4:
+  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_19_24_S4P_Sky.mp4:
     crop: 31, 299, 20, 281
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_20_24_S1P_Cyan.mp4:
+  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_20_24_S1P_Cyan.mp4:
     crop: 34, 299, 19, 281
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_20_24_S1P_Orange.mp4:
-    crop: 47, 318, 10, 279
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_20_24_S1P_Teal.mp4:
+  ? /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_20_24_S1P_Orange.mp4
+  : crop: 47, 318, 10, 279
+  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_20_24_S1P_Teal.mp4:
     crop: 62, 318, 16, 270
 bodyparts:
 - Head
 - Neck
 - Tailbase
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
 
 
 # Fraction of video to start/stop when extracting frames for labeling/refinement

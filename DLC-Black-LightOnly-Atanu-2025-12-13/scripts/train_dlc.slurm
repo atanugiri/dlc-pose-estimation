@@ -46,22 +46,24 @@ import deeplabcut
 #     snapshot_path="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-0/DLC-Black-LightOnlyDec13-trainset95shuffle1/train/snapshot-best-050.pt"
 # )
 
-deeplabcut.evaluate_network(
-    "$CONFIG_PATH",
-    Shuffles=[$SHUFFLE],
-    trainingsetindex=$TRAININGSETINDEX,
-    gputouse="$DEVICE",
-    plotting=True
-)
-
-# deeplabcut.analyze_videos(
+# deeplabcut.evaluate_network(
 #     "$CONFIG_PATH",
-#     ["$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Navy.mp4", 
-#     "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Tan.mp4"],
-#     shuffle=$SHUFFLE,
+#     Shuffles=[$SHUFFLE],
 #     trainingsetindex=$TRAININGSETINDEX,
 #     gputouse="$DEVICE",
+#     plotting=True
 # )
+
+deeplabcut.analyze_videos(
+    "$CONFIG_PATH",
+    ["$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Cyan.mp4", 
+    "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Orange.mp4",
+    "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Teal.mp4",
+    "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Azul.mp4"],
+    shuffle=$SHUFFLE,
+    trainingsetindex=$TRAININGSETINDEX,
+    gputouse="$DEVICE",
+)
 
 # deeplabcut.filterpredictions(
 #     "$CONFIG_PATH",
