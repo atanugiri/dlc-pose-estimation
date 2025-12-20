@@ -33,26 +33,26 @@ cd "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13"
 python <<EOF
 import deeplabcut
 
-deeplabcut.train_network(
-    "$CONFIG_PATH",
-    shuffle=$SHUFFLE,
-    trainingsetindex=$TRAININGSETINDEX,
-    device="$DEVICE",
-    max_snapshots_to_keep=5,
-    displayiters=100,
-    save_epochs=5,
-    epochs=$EPOCHS,
-    batch_size=8,
-    snapshot_path="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-0/DLC-Black-LightOnlyDec13-trainset95shuffle1/train/snapshot-best-050.pt"
-)
-
-# deeplabcut.evaluate_network(
+# deeplabcut.train_network(
 #     "$CONFIG_PATH",
-#     Shuffles=[$SHUFFLE],
+#     shuffle=$SHUFFLE,
 #     trainingsetindex=$TRAININGSETINDEX,
-#     gputouse="$DEVICE",
-#     plotting=True
+#     device="$DEVICE",
+#     max_snapshots_to_keep=5,
+#     displayiters=100,
+#     save_epochs=5,
+#     epochs=$EPOCHS,
+#     batch_size=8,
+#     snapshot_path="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-0/DLC-Black-LightOnlyDec13-trainset95shuffle1/train/snapshot-best-050.pt"
 # )
+
+deeplabcut.evaluate_network(
+    "$CONFIG_PATH",
+    Shuffles=[$SHUFFLE],
+    trainingsetindex=$TRAININGSETINDEX,
+    gputouse="$DEVICE",
+    plotting=True
+)
 
 # deeplabcut.analyze_videos(
 #     "$CONFIG_PATH",
