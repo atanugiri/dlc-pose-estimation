@@ -14,6 +14,6 @@ all_joints_names:
 - Midback
 - Lowerback
 - Tailbase
-net_type: resnet_50
+net_type: resnet_101
 global_scale: 1
 scoremap_dir: test

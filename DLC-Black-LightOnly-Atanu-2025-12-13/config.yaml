@@ -8,7 +8,7 @@ identity:
 
 # Project path (change when moving around)
 project_path: 
-  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13
+  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13
 
 
 # Default DeepLabCut engine to use for shuffle creation (either pytorch or tensorflow)
@@ -95,7 +95,7 @@ colormap: rainbow
 TrainingFraction:
 - 0.95
 iteration: 3
-default_net_type: resnet_50
+default_net_type: resnet_101
 default_augmenter: default
 snapshotindex: -1
 detector_snapshotindex: -1

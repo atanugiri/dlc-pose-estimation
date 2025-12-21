@@ -14,8 +14,8 @@
 CONFIG_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/config.yaml"
 CONDA_ENV="$SCRATCH/miniconda3/envs/dlcfix"
 DEVICE="cuda:0"
-EPOCHS=200
-SHUFFLE=3
+EPOCHS=500
+SHUFFLE=1
 TRAININGSETINDEX=0
 SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-2/DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-590.pt"
 TASK="train"  # Options: train, evaluate, analyze, filter, label_video
@@ -44,8 +44,7 @@ if "$TASK" == "train":
         displayiters=100,
         save_epochs=5,
         epochs=$EPOCHS,
-        batch_size=8,
-        snapshot_path="$SNAPSHOT_PATH"
+        batch_size=8
     )
 elif "$TASK" == "evaluate":
     deeplabcut.evaluate_network(
