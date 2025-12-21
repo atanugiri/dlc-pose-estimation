@@ -14,10 +14,11 @@
 CONFIG_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/config.yaml"
 CONDA_ENV="$SCRATCH/miniconda3/envs/dlcfix"
 DEVICE="cuda:0"
-EPOCHS=500
-SHUFFLE=2
+EPOCHS=200
+SHUFFLE=3
 TRAININGSETINDEX=0
-SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-2/DLC-Black-LightOnlyDec13-trainset95shuffle1/train/snapshot-best-410.pt"
+SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-2/DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-590.pt"
+TASK="label_video"  # Options: train, evaluate, analyze, filter, label_video
 echo "Job started on $(hostname) at $(date)"
 
 # Initialize environment
@@ -33,49 +34,53 @@ cd "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13"
 python <<EOF
 import deeplabcut
 
-deeplabcut.train_network(
-    "$CONFIG_PATH",
-    shuffle=$SHUFFLE,
-    trainingsetindex=$TRAININGSETINDEX,
-    device="$DEVICE",
-    max_snapshots_to_keep=5,
-    displayiters=100,
-    save_epochs=5,
-    epochs=$EPOCHS,
-    batch_size=8,
-    snapshot_path="$SNAPSHOT_PATH"
-)
-
-# deeplabcut.evaluate_network(
-#     "$CONFIG_PATH",
-#     Shuffles=[$SHUFFLE],
-#     trainingsetindex=$TRAININGSETINDEX,
-#     gputouse="$DEVICE",
-#     plotting=True
-# )
-
-# deeplabcut.analyze_videos(
-#     "$CONFIG_PATH",
-#     ["$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Cyan.mp4", 
-#     "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Orange.mp4",
-#     "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Teal.mp4",
-#     "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Azul.mp4"],
-#     shuffle=$SHUFFLE,
-#     trainingsetindex=$TRAININGSETINDEX,
-#     gputouse="$DEVICE",
-# )
-
-# deeplabcut.filterpredictions(
-#     "$CONFIG_PATH",
-#     ["$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Navy.mp4", 
-#     "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Tan.mp4"]
-# )
-
-# deeplabcut.create_labeled_video(
-#     "$CONFIG_PATH",
-#     ["$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Navy.mp4", 
-#     "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S4P_Tan.mp4"],
-#     filtered=True
-# )
+if "$TASK" == "train":
+    deeplabcut.train_network(
+        "$CONFIG_PATH",
+        shuffle=$SHUFFLE,
+        trainingsetindex=$TRAININGSETINDEX,
+        device="$DEVICE",
+        max_snapshots_to_keep=5,
+        displayiters=100,
+        save_epochs=5,
+        epochs=$EPOCHS,
+        batch_size=8,
+        snapshot_path="$SNAPSHOT_PATH"
+    )
+elif "$TASK" == "evaluate":
+    deeplabcut.evaluate_network(
+        "$CONFIG_PATH",
+        Shuffles=[1,2,3],
+        trainingsetindex=$TRAININGSETINDEX,
+        gputouse="$DEVICE",
+        plotting=True
+    )
+elif "$TASK" == "analyze":
+    deeplabcut.analyze_videos(
+        "$CONFIG_PATH",
+        ["$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Cyan.mp4", 
+        "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Orange.mp4"],
+        shuffle=$SHUFFLE,
+        trainingsetindex=$TRAININGSETINDEX,
+        gputouse="$DEVICE"
+    )
+elif "$TASK" == "filter":
+    deeplabcut.filterpredictions(
+        config="$CONFIG_PATH",
+        video=["$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Cyan.mp4", 
+        "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Orange.mp4"],
+        shuffle=$SHUFFLE,
+        save_as_csv=False
+    )
+elif "$TASK" == "label_video":
+    deeplabcut.create_labeled_video(
+        config="$CONFIG_PATH",
+        videos=["$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Cyan.mp4", 
+        "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Orange.mp4"],
+        shuffle=$SHUFFLE,
+        filtered=True
+    )
+else:
+    print("Invalid TASK. Set TASK to: train, evaluate, analyze, filter, or label_video")
 EOF
 echo "Job completed at $(date)"

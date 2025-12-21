@@ -39,12 +39,6 @@ metadata:
   - Head
   - Neck
   - Tailbase
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
   unique_bodyparts: []
   individuals:
   - animal
@@ -101,7 +95,7 @@ model:
         - 2
 net_type: resnet_101
 runner:
-  type: PoseTrainingRunner  
+  type: PoseTrainingRunner
   gpus:
   key_metric: test.rmse
   key_metric_asc: false
@@ -121,12 +115,12 @@ runner:
       - 120
   snapshots:
     max_snapshots: 5
-    save_epochs: 25
+    save_epochs: 5
     save_optimizer_state: false
 train_settings:
   batch_size: 8
   dataloader_workers: 0
   dataloader_pin_memory: false
-  display_iters: 500
+  display_iters: 100
   epochs: 200
   seed: 42

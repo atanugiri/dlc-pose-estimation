@@ -75,20 +75,22 @@ This cookbook summarizes the DeepLabCut workflow for pose estimation, based on o
       snapshot_path="path/to/init/model.pt"  # Optional transfer learning
   )
   ```
+- **Model Selection**: Use ResNet-101 or ResNet-152 for complex data (occlusions, low contrast) instead of ResNet-50. Larger models improve accuracy but require more GPU memory/time.
+- **Transfer Learning**: For multiple shuffles, train shuffle 1 from scratch, then use shuffle 1's best snapshot as `snapshot_path` for shuffle 2, and so on. This speeds up convergence and boosts performance.
 
 ## Evaluating the Model
 - Evaluate on test set:
   ```python
   deeplabcut.evaluate_network(config_path, Shuffles=[1], plotting=True)
   ```
-- Check metrics: RMSE <5, mAP >80% for good performance.
+- Check metrics: RMSE <2 pixels and mAP >80% indicate excellent performance. mAP >85% is outstanding.
 - **Multiple Shuffles**: For robustness, create and evaluate multiple shuffles.
   ```python
   deeplabcut.create_training_dataset(config_path, num_shuffles=3)  # Shuffles 1,2,3
   # Train each shuffle separately (update SHUFFLE in script)
   deeplabcut.evaluate_network(config_path, Shuffles=[1,2,3], plotting=True)
   ```
-  - Compare metrics across shuffles for uniformity.
+  - Compare metrics across shuffles for uniformity. If one shuffle has much lower mAP (e.g., <50%), it may be overfitting—consider retraining with more data or active learning.
 
 ## Analyzing Videos
 - Predict poses on new videos:
@@ -110,7 +112,7 @@ This cookbook summarizes the DeepLabCut workflow for pose estimation, based on o
   - Use `filtered=True` to show smoothed predictions. This provides qualitative confirmation of tracking accuracy, complementing quantitative metrics like RMSE and mAP.
 
 ## Active Learning (Outliers)
-Active learning is used to improve model performance by identifying and labeling frames where the model is uncertain. Use this after initial training and evaluation if metrics are poor (e.g., RMSE >5 pixels, mAP <80%). This typically happens after the first round of training, evaluation, and analysis on videos. If the model's predictions are inaccurate or inconsistent, extract outliers, refine labels, and retrain.
+Active learning is used to improve model performance by identifying and labeling frames where the model is uncertain. Use this after initial training and evaluation if metrics are poor (e.g., RMSE >5 pixels, mAP <80%). This typically happens after the first round of training, evaluation, and analysis on videos. If the model's predictions are inaccurate or inconsistent, extract outliers, refine labels, and retrain. If mAP is already >80%, active learning is optional but can push accuracy higher.
 
 - Extract uncertain frames for refinement:
   ```python
@@ -140,8 +142,11 @@ Active learning is used to improve model performance by identifying and labeling
 
 ## Tips
 - Always evaluate after training.
-- Use multiple shuffles for robustness.
-- Backup models and data.
+- Use multiple shuffles for robustness and compare metrics.
+- For challenging data (occlusions, low contrast), use ResNet-101 and transfer learning between shuffles.
+- If mAP >80%, the model is ready for analysis; active learning can refine further.
+- Preprocess videos (e.g., contrast enhancement with FFmpeg) if color differentiation is poor.
+- Backup models and data regularly.
 - For questions, refer to [DeepLabCut Docs](https://deeplabcut.github.io/DeepLabCut/).
 
 This cookbook is based on our workflow—update as needed!
