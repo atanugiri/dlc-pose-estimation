@@ -18,7 +18,7 @@ EPOCHS=200
 SHUFFLE=3
 TRAININGSETINDEX=0
 SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-2/DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-590.pt"
-TASK="label_video"  # Options: train, evaluate, analyze, filter, label_video
+TASK="train"  # Options: train, evaluate, analyze, filter, label_video
 echo "Job started on $(hostname) at $(date)"
 
 # Initialize environment

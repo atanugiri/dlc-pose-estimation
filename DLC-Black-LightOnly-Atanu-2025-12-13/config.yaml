@@ -65,6 +65,9 @@ bodyparts:
 
 
 # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
 start: 0
 stop: 1
 numframes2pick: 5
@@ -91,7 +94,7 @@ colormap: rainbow
 # Training,Evaluation and Analysis configuration
 TrainingFraction:
 - 0.95
-iteration: 2
+iteration: 3
 default_net_type: resnet_50
 default_augmenter: default
 snapshotindex: -1
