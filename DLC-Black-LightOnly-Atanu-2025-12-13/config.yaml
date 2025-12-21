@@ -8,7 +8,7 @@ identity:
 
 # Project path (change when moving around)
 project_path: 
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13
+  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13
 
 
 # Default DeepLabCut engine to use for shuffle creation (either pytorch or tensorflow)
@@ -50,7 +50,15 @@ video_sets:
 bodyparts:
 - Head
 - Neck
+- Midback
+- Lowerback
 - Tailbase
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
 
 
 # Fraction of video to start/stop when extracting frames for labeling/refinement
@@ -66,8 +74,13 @@ numframes2pick: 5
 skeleton:
 - - Head
   - Neck
-- - Head
+- - Neck
+  - Midback
+- - Midback
+  - Lowerback
+- - Lowerback
   - Tailbase
+
 skeleton_color: black
 pcutoff: 0.6
 dotsize: 6

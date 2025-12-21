@@ -104,12 +104,20 @@ This cookbook summarizes the DeepLabCut workflow for pose estimation, based on o
   deeplabcut.filterpredictions(config_path, [video_paths], shuffle=1, filtertype='median', p_bound=0.05)
   ```
 
-## Creating Labeled Videos
-- Visualize predictions (overlays predicted poses on videos for visual inspection):
-  ```python
-  deeplabcut.create_labeled_video(config_path, [video_paths], shuffle=1, filtered=True)
-  ```
-  - Use `filtered=True` to show smoothed predictions. This provides qualitative confirmation of tracking accuracy, complementing quantitative metrics like RMSE and mAP.
+## Adding or Modifying Bodyparts
+If you need to add more bodyparts (e.g., tail segments, limbs) after initial setup:
+
+1. **Edit `config.yaml`**: Add new bodyparts under `bodyparts:` and update `skeleton:` for connections.
+2. **Relabel Specific Frames**: Label only the relevant videos/folders for the new bodyparts.
+   ```python
+   deeplabcut.label_frames(config_path, videos=["path/to/labeled-data/folder/"])
+   ```
+3. **Merge and Retrain**:
+   ```python
+   deeplabcut.merge_datasets(config_path)
+   deeplabcut.create_training_dataset(config_path, num_shuffles=3)
+   # Retrain shuffles as needed
+   ```
 
 ## Active Learning (Outliers)
 Active learning is used to improve model performance by identifying and labeling frames where the model is uncertain. Use this after initial training and evaluation if metrics are poor (e.g., RMSE >5 pixels, mAP <80%). This typically happens after the first round of training, evaluation, and analysis on videos. If the model's predictions are inaccurate or inconsistent, extract outliers, refine labels, and retrain. If mAP is already >80%, active learning is optional but can push accuracy higher.
