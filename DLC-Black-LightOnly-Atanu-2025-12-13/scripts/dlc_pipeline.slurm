@@ -3,7 +3,7 @@
 #SBATCH --job-name=dlc_train
 #SBATCH --output=%x-%j.out
 #SBATCH --error=%x-%j.err
-#SBATCH --partition=gpu-a100       # Use the A100 GPU partition
+#SBATCH --partition=gpu-a100-dev       # Use the A100 GPU partition
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=10
@@ -17,7 +17,7 @@ DEVICE="cuda:0"
 EPOCHS=500
 SHUFFLE=1
 TRAININGSETINDEX=0
-SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-2/DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-590.pt"
+SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-3/DLC-Black-LightOnlyDec13-trainset95shuffle1/train/snapshot-best-080.pt"
 TASK="train"  # Options: train, evaluate, analyze, filter, label_video
 echo "Job started on $(hostname) at $(date)"
 
@@ -44,7 +44,8 @@ if "$TASK" == "train":
         displayiters=100,
         save_epochs=5,
         epochs=$EPOCHS,
-        batch_size=8
+        batch_size=8,
+        snapshot_path="$SNAPSHOT_PATH"
     )
 elif "$TASK" == "evaluate":
     deeplabcut.evaluate_network(
