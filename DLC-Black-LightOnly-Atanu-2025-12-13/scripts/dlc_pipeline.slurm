@@ -17,8 +17,9 @@ DEVICE="cuda:0"
 EPOCHS=200
 SHUFFLE=3
 TRAININGSETINDEX=0
+VIDEOS="./videos/*.mp4"
 SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-3/DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-230.pt"
-TASK="evaluate"  # Options: train, evaluate, analyze, filter, label_video
+TASK="analyze"  # Options: train, evaluate, analyze, filter, label_video
 echo "Job started on $(hostname) at $(date)"
 
 # Initialize environment
@@ -33,6 +34,8 @@ cd "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13"
 # Run DeepLabCut
 python <<EOF
 import deeplabcut
+import glob
+videos = glob.glob("$VIDEOS")
 
 if "$TASK" == "train":
     deeplabcut.train_network(
@@ -58,8 +61,7 @@ elif "$TASK" == "evaluate":
 elif "$TASK" == "analyze":
     deeplabcut.analyze_videos(
         "$CONFIG_PATH",
-        ["$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Cyan.mp4", 
-        "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Orange.mp4"],
+        videos=videos,
         shuffle=$SHUFFLE,
         trainingsetindex=$TRAININGSETINDEX,
         gputouse="$DEVICE"
@@ -67,16 +69,14 @@ elif "$TASK" == "analyze":
 elif "$TASK" == "filter":
     deeplabcut.filterpredictions(
         config="$CONFIG_PATH",
-        video=["$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Cyan.mp4", 
-        "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Orange.mp4"],
+        video=videos,
         shuffle=$SHUFFLE,
         save_as_csv=False
     )
 elif "$TASK" == "label_video":
     deeplabcut.create_labeled_video(
         config="$CONFIG_PATH",
-        videos=["$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Cyan.mp4", 
-        "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_18_24_S3Y_Orange.mp4"],
+        videos=videos,
         shuffle=$SHUFFLE,
         filtered=True
     )
