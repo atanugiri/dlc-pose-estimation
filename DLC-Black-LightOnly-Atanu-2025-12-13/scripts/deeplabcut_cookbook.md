@@ -138,7 +138,7 @@ Active learning is used to improve model performance by identifying and labeling
   - Exact mirror (deletes extra files): `rsync -avzP --delete . lonestar6:/work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/`
   - Safe testing (dry run): `rsync -avzP --dry-run . lonestar6:/work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/`
 - Submit job: `sbatch scripts/train_dlc.slurm`
-- Monitor: `squeue -u user`, `sacct -j job_id`
+- Monitor: `squeue -u $USER`, `sacct -j job_id`
 - Paths: Use `$WORK` for project root.
 
 ## Troubleshooting
