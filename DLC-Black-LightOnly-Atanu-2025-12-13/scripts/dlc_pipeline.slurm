@@ -19,7 +19,7 @@ SHUFFLE=3
 TRAININGSETINDEX=0
 VIDEOS="./videos/*.mp4"
 SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-3/DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-230.pt"
-TASK="analyze"  # Options: train, evaluate, analyze, filter, label_video
+TASK="filter"  # Options: train, evaluate, analyze, filter, label_video
 echo "Job started on $(hostname) at $(date)"
 
 # Initialize environment
