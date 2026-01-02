@@ -6,9 +6,9 @@
 #SBATCH --partition=gpu-a100       # Use the A100 GPU partition
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=10
-#SBATCH --time=08:00:00
-#SBATCH --mem=64G
+#SBATCH --cpus-per-task=6
+#SBATCH --time=02:00:00
+#SBATCH --mem=32G
 
 # --- Variables ---
 CONFIG_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/config.yaml"
@@ -17,9 +17,9 @@ DEVICE="cuda:0"
 EPOCHS=200
 SHUFFLE=3
 TRAININGSETINDEX=0
-VIDEOS="./videos/*.mp4"
+VIDEOS="$WORK/Black-ToyOnly/videos/*.mp4"
 SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-3/DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-230.pt"
-TASK="analyze"  # Options: train, evaluate, analyze, filter, label_video
+TASK="label_video"  # Options: train, evaluate, analyze, filter, label_video
 echo "Job started on $(hostname) at $(date)"
 
 # Initialize environment
@@ -36,6 +36,7 @@ python <<EOF
 import deeplabcut
 import glob
 videos = glob.glob("$VIDEOS")
+videos = videos[:2]  # Uncomment to process only first two videos for testing
 
 if "$TASK" == "train":
     deeplabcut.train_network(
