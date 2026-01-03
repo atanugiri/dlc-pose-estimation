@@ -15,11 +15,11 @@ CONFIG_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/config.yaml"
 CONDA_ENV="$SCRATCH/miniconda3/envs/dlcfix"
 DEVICE="cuda:0"
 EPOCHS=200
-SHUFFLE=3
+SHUFFLE=1
 TRAININGSETINDEX=0
 VIDEOS="$WORK/Black-ToyOnly/videos/*.mp4"
-SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-3/DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-230.pt"
-TASK="label_video"  # Options: train, evaluate, analyze, filter, label_video
+SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-1/DLC-Black-LightOnlyDec13-trainset95shuffle1/train/snapshot-best-060.pt"
+TASK="analyze"  # Options: train, evaluate, analyze, filter, label_video
 echo "Job started on $(hostname) at $(date)"
 
 # Initialize environment
@@ -27,6 +27,10 @@ source $SCRATCH/miniconda3/etc/profile.d/conda.sh
 conda activate "$CONDA_ENV"
 
 echo "Using python: $(which python)"
+
+# Check GPU status before task
+echo "GPU status before task:"
+nvidia-smi --query-gpu=index,memory.used,memory.total --format=csv,noheader,nounits
 
 # Change to the project directory to ensure outputs are saved correctly
 cd "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13"
@@ -84,4 +88,9 @@ elif "$TASK" == "label_video":
 else:
     print("Invalid TASK. Set TASK to: train, evaluate, analyze, filter, or label_video")
 EOF
+
+# Check GPU status after task
+echo "GPU status after task:"
+nvidia-smi --query-gpu=index,memory.used,memory.total --format=csv,noheader,nounits
+
 echo "Job completed at $(date)"
