@@ -1,26 +1,25 @@
 #!/bin/bash
 #SBATCH -A DBS25005                # project allocation code
-#SBATCH --job-name=dlc_pipeline
+#SBATCH --job-name=dlc_gpu
 #SBATCH --output=%x-%j.out
 #SBATCH --error=%x-%j.err
-#SBATCH --partition=gpu-a100-small # Use the smaller GPU queue for single-GPU jobs
-#SBATCH --gres=gpu:1               # request one GPU
+#SBATCH --partition=gpu-a100       # GPU partition
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=6
-#SBATCH --time=00:30:00            # >= 15m billing minimum
-#SBATCH --mem=32G
+#SBATCH --time=01:30:00            # 1.5 hours for 25 videos (analyze ~52 min)
+#SBATCH --mem=16G
 
 # --- Variables ---
 export CONFIG_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/config.yaml"
 export CONDA_ENV="$SCRATCH/miniconda3/envs/dlcfix"
 export DEVICE="cuda:0"
 export EPOCHS=200
-export SHUFFLE=1
+export SHUFFLE=3
 export TRAININGSETINDEX=0
 export VIDEOS="$WORK/Black-ToyOnly/videos/*.mp4"
-export SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-1/DLC-Black-LightOnlyDec13-trainset95shuffle1/train/snapshot-best-060.pt"
-export TASK="all"  # Options: train, evaluate, analyze, filter, label_video, all
+export SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-3/DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-230.pt"
+export TASK="analyze"  # Options: train, evaluate, analyze, all
 
 echo "Job started on $(hostname) at $(date)"
 

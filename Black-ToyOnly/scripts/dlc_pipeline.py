@@ -14,6 +14,7 @@ def nvidia_status(label):
 
 def do_train(config, shuffle, trainingsetindex, device, epochs, snapshot_path):
     print("Starting train:", time.asctime())
+    nvidia_status("before train")
     deeplabcut.train_network(
         config,
         shuffle=shuffle,
@@ -26,17 +27,20 @@ def do_train(config, shuffle, trainingsetindex, device, epochs, snapshot_path):
         batch_size=8,
         snapshot_path=snapshot_path
     )
+    nvidia_status("after train")
     print("Completed train:", time.asctime())
 
 def do_evaluate(config, shuffles, trainingsetindex, device):
     print("Starting evaluate:", time.asctime())
+    nvidia_status("before evaluate")
     deeplabcut.evaluate_network(
         config,
         Shuffles=shuffles,
         trainingsetindex=trainingsetindex,
-        gputouse=device,
+        device=device,
         plotting=True
     )
+    nvidia_status("after evaluate")
     print("Completed evaluate:", time.asctime())
 
 def do_analyze(config, videos, shuffle, trainingsetindex, device):
@@ -47,7 +51,7 @@ def do_analyze(config, videos, shuffle, trainingsetindex, device):
         videos=videos,
         shuffle=shuffle,
         trainingsetindex=trainingsetindex,
-        gputouse=device
+        device=device
     )
     nvidia_status("after analyze")
     print("Completed analyze:", time.asctime())
@@ -91,6 +95,9 @@ def main():
     if not videos:
         print(f"No videos found at: {videos_pattern}")
         sys.exit(1)
+
+    # For testing: limit to first 2 videos (comment out for full run)
+    videos = videos[:2]
     
     print(f"Found {len(videos)} videos")
     
