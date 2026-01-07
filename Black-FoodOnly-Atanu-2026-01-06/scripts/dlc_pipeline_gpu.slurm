@@ -1,18 +1,19 @@
 #!/bin/bash
-#SBATCH -A DBS25005                # project allocation code
+##SBATCH -A DBS25005          # project allocation code for lonestar6
 #SBATCH --job-name=dlc_gpu
 #SBATCH --output=%x-%j.out
 #SBATCH --error=%x-%j.err
-#SBATCH --partition=gpu-a100       # GPU partition
+#SBATCH --partition=dgx       # GPU partition
+#SBATCH --gres=gpu:1          # request 1 GPU only for punakha
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=6
-#SBATCH --time=2:00:00            # 2 hours for training
+#SBATCH --time=2:00:00        # 2 hours for training
 #SBATCH --mem=16G
 
 # --- Variables ---
 export CONFIG_PATH="$WORK/Black-FoodOnly-Atanu-2026-01-06/config.yaml"
-export CONDA_ENV="$SCRATCH/miniconda3/envs/dlcfix"
+export CONDA_ENV="$HOME/miniconda3/envs/DEEPLABCUT"
 export DEVICE="cuda:0"
 export EPOCHS=500
 export SHUFFLE=1
@@ -24,7 +25,7 @@ export TASK="train"  # Options: train, evaluate, analyze, all
 echo "Job started on $(hostname) at $(date)"
 
 # Initialize environment
-source $SCRATCH/miniconda3/etc/profile.d/conda.sh
+source $HOME/miniconda3/etc/profile.d/conda.sh
 conda activate "$CONDA_ENV"
 
 # Control thread usage for OpenMP/MKL

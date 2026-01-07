@@ -83,6 +83,7 @@ rm -rf DeepLabCut  # Saves ~500MB
 - ✅ HPC clusters with custom requirements
 - ✅ Want latest pre-release features
 - ✅ Need fine control over dependencies
+- ✅ Headless installation (no GUI)
 
 ### Steps
 
@@ -101,8 +102,11 @@ rm -rf DeepLabCut  # Saves ~500MB
 
    **For NVIDIA GPUs (CUDA)**:
    ```bash
-   # Check PyTorch website for latest versions
+   # Standard conda install (may have conflicts on some systems)
    conda install pytorch torchvision cudatoolkit=11.8 -c pytorch -c conda-forge
+
+   # For HPC clusters (avoids conda conflicts, use pip):
+   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121  # For CUDA 12.1
    ```
 
    **For Apple Silicon Macs**:
@@ -117,11 +121,17 @@ rm -rf DeepLabCut  # Saves ~500MB
 
 4. **Install DeepLabCut**:
    ```bash
-   # Latest stable
+   # Latest stable with GUI
    pip install deeplabcut[gui]
 
-   # Or latest pre-release
+   # Headless (no GUI, for HPC/servers):
+   pip install deeplabcut
+
+   # Or latest pre-release with GUI
    pip install --pre deeplabcut[gui]
+
+   # Or latest pre-release headless
+   pip install --pre deeplabcut
    ```
 
 5. **Verify installation** (same as Method 1)
@@ -217,8 +227,12 @@ rm -rf DeepLabCut  # Saves ~500MB
 
 ### HPC Clusters
 - Use **Method 2** for custom CUDA/Python versions
-- Check cluster-specific requirements
+- Prefer pip for PyTorch to avoid conda conflicts
+- Use headless install: `pip install --pre deeplabcut`
+- Check cluster-specific requirements (e.g., GPU partitions, quotas)
 - May need to load modules (e.g., `module load cuda`)
+- Source conda on compute nodes: `source /path/to/miniconda3/etc/profile.d/conda.sh`
+- Test GPU access on compute nodes, not login nodes
 
 ---
 
@@ -231,8 +245,9 @@ rm -rf DeepLabCut  # Saves ~500MB
 - Try `conda env update -f DEEPLABCUT.yaml`
 
 **CUDA not detected**:
-- Check NVIDIA drivers: `nvidia-smi`
+- Check NVIDIA drivers: `nvidia-smi` (on compute nodes for HPC)
 - Verify PyTorch CUDA: `python -c "import torch; print(torch.cuda.is_available())"`
+- On HPC: GPUs are only accessible on compute nodes, not login nodes
 
 **MPS not working on Mac**:
 - Ensure PyTorch 1.12+
