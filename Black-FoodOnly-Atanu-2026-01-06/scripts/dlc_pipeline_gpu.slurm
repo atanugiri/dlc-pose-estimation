@@ -7,7 +7,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=6
-#SBATCH --time=01:30:00            # 1.5 hours for 25 videos (analyze ~52 min)
+#SBATCH --time=00:15:00            # 1.5 hours for 25 videos (analyze ~52 min)
 #SBATCH --mem=16G
 
 # --- Variables ---
@@ -17,7 +17,7 @@ export DEVICE="cuda:0"
 export EPOCHS=200
 export SHUFFLE=3
 export TRAININGSETINDEX=0
-export VIDEOS="$WORK/Black-ToyOnly/videos/*.mp4"
+export VIDEOS="$WORK/Black-FoodOnly-Atanu-2026-01-06/videos/*.mp4"
 export SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-3/DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-230.pt"
 export TASK="analyze"  # Options: train, evaluate, analyze, all
 
@@ -41,7 +41,7 @@ nvidia-smi --query-gpu=index,memory.used,memory.total,utilization.gpu --format=c
 cd "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13"
 
 # Run DeepLabCut pipeline
-python "$WORK/Black-ToyOnly/scripts/dlc_pipeline.py"
+python "$WORK/Black-FoodOnly-Atanu-2026-01-06/scripts/dlc_pipeline.py"
 
 # Check GPU status after task
 echo "GPU status after task:"

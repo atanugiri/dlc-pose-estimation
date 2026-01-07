@@ -6,7 +6,7 @@
 #SBATCH --partition=normal         # CPU partition (no GPU cost)
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8          # More CPUs for video encoding
+#SBATCH --cpus-per-task=24          # More CPUs for video encoding
 #SBATCH --time=00:30:00            # 30 min for filter+label (25 videos ~15 min)
 #SBATCH --mem=16G
 
@@ -17,7 +17,8 @@ export DEVICE="cpu"                # Force CPU (no GPU on this partition)
 export SHUFFLE=3
 export TRAININGSETINDEX=0
 export VIDEOS="$WORK/Black-FoodOnly-Atanu-2026-01-06/videos/*.mp4"
-export TASK="filter"               # Options: filter, label_video
+export SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-3/DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-230.pt"
+export TASK="label_video"               # Options: filter, label_video
 
 echo "Job started on $(hostname) at $(date)"
 
@@ -35,6 +36,6 @@ echo "Using python: $(which python)"
 cd "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13"
 
 # Run DeepLabCut pipeline
-python "$WORK/Black-ToyOnly/scripts/dlc_pipeline.py"
+python "$WORK/Black-FoodOnly-Atanu-2026-01-06/scripts/dlc_pipeline.py"
 
 echo "Job completed at $(date)"

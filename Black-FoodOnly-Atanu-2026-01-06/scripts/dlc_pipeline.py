@@ -51,7 +51,8 @@ def do_analyze(config, videos, shuffle, trainingsetindex, device):
         videos=videos,
         shuffle=shuffle,
         trainingsetindex=trainingsetindex,
-        device=device
+        device=device,
+        in_random_order=False
     )
     nvidia_status("after analyze")
     print("Completed analyze:", time.asctime())
@@ -75,7 +76,8 @@ def do_label(config, videos, shuffle):
         config=config,
         videos=videos,
         shuffle=shuffle,
-        filtered=True
+        filtered=True,
+        pcutoff=0.3
     )
     nvidia_status("after label_video")
     print("Completed label_video:", time.asctime())
@@ -91,13 +93,14 @@ def main():
     epochs = int(os.environ.get("EPOCHS", 200))
     snapshot_path = os.environ.get("SNAPSHOT_PATH", "")
     
-    videos = glob.glob(videos_pattern)
+    videos = sorted(glob.glob(videos_pattern))
     if not videos:
         print(f"No videos found at: {videos_pattern}")
         sys.exit(1)
 
     # For testing: limit to first 2 videos (comment out for full run)
-    videos = videos[:2]
+    selected_indices = [1, 3]
+    videos = [videos[i] for i in selected_indices]
     
     print(f"Found {len(videos)} videos")
     
