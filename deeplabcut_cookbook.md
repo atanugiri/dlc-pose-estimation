@@ -63,7 +63,7 @@ This cookbook summarizes the DeepLabCut workflow for pose estimation, based on o
 - Merge labels and create splits:
   ```python
   deeplabcut.merge_datasets(config_path)
-  deeplabcut.create_training_dataset(config_path, Shuffles=[1])  # For specific shuffle
+  deeplabcut.create_training_dataset(config_path, num_shuffles=3)  # For specific shuffle
   ```
 
 ## Training the Network

@@ -7,19 +7,19 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=6
-#SBATCH --time=00:15:00            # 1.5 hours for 25 videos (analyze ~52 min)
+#SBATCH --time=2:00:00            # 2 hours for training
 #SBATCH --mem=16G
 
 # --- Variables ---
-export CONFIG_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/config.yaml"
+export CONFIG_PATH="$WORK/Black-FoodOnly-Atanu-2026-01-06/config.yaml"
 export CONDA_ENV="$SCRATCH/miniconda3/envs/dlcfix"
 export DEVICE="cuda:0"
-export EPOCHS=200
-export SHUFFLE=3
+export EPOCHS=500
+export SHUFFLE=1
 export TRAININGSETINDEX=0
 export VIDEOS="$WORK/Black-FoodOnly-Atanu-2026-01-06/videos/*.mp4"
-export SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-3/DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-230.pt"
-export TASK="analyze"  # Options: train, evaluate, analyze, all
+# export SNAPSHOT_PATH="$WORK/Black-FoodOnly-Atanu-2026-01-06/dlc-models-pytorch/iteration-3/DLC-Black-FoodOnlyJan06-trainset95shuffle3/train/snapshot-best-230.pt"
+export TASK="train"  # Options: train, evaluate, analyze, all
 
 echo "Job started on $(hostname) at $(date)"
 
@@ -38,7 +38,7 @@ echo "GPU status before task:"
 nvidia-smi --query-gpu=index,memory.used,memory.total,utilization.gpu --format=csv,noheader,nounits
 
 # Change to the project directory to ensure outputs are saved correctly
-cd "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13"
+cd "$WORK/Black-FoodOnly-Atanu-2026-01-06"
 
 # Run DeepLabCut pipeline
 python "$WORK/Black-FoodOnly-Atanu-2026-01-06/scripts/dlc_pipeline.py"
