@@ -1,0 +1,99 @@
+# Project definitions (do not edit)
+Task: Black-FoodOnly
+scorer: Atanu
+date: Jan6
+multianimalproject: false
+identity:
+
+
+# Project path (change when moving around)
+project_path: 
+  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodOnly-Atanu-2026-01-06
+
+
+# Default DeepLabCut engine to use for shuffle creation (either pytorch or tensorflow)
+engine: pytorch
+
+
+# Annotation data set configuration (and individual video cropping parameters)
+video_sets:
+  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodOnly-Atanu-2026-01-06/videos/FoodOnly_8_28_24_S3P_Cyan_Trial1.mp4:
+    crop: 84, 561, 0, 471
+  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodOnly-Atanu-2026-01-06/videos/FoodOnly_8_28_24_S3P_Orange_Trial1.mp4:
+    crop: 80, 554, 0, 472
+  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodOnly-Atanu-2026-01-06/videos/FoodOnly_8_28_24_S3P_Teal_Trial1.mp4:
+    crop: 72, 551, 1, 467
+  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodOnly-Atanu-2026-01-06/videos/FoodOnly_8_28_24_S4Y_Azul.mp4:
+    crop: 72, 555, 0, 466
+  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodOnly-Atanu-2026-01-06/videos/FoodOnly_8_28_24_S4Y_Navy.mp4:
+    crop: 80, 553, 1, 470
+  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodOnly-Atanu-2026-01-06/videos/FoodOnly_8_28_24_S4Y_Tan.mp4:
+    crop: 83, 564, 0, 468
+  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodOnly-Atanu-2026-01-06/videos/FoodOnly_8_29_24_S3P_Indigo.mp4:
+    crop: 72, 554, 1, 467
+  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodOnly-Atanu-2026-01-06/videos/FoodOnly_8_29_24_S3P_Lilac.mp4:
+    crop: 84, 561, 1, 471
+bodyparts:
+- Head
+- Neck
+- Midback
+- Lowerback
+- Tailbase
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+start: 0
+stop: 1
+numframes2pick: 5
+
+
+# Plotting configuration
+skeleton:
+- - Head
+  - Neck
+- - Neck
+  - Midback
+- - Midback
+  - Lowerback
+- - Lowerback
+  - Tailbase
+
+skeleton_color: black
+pcutoff: 0.6
+dotsize: 6
+alphavalue: 0.7
+colormap: rainbow
+
+
+# Training,Evaluation and Analysis configuration
+TrainingFraction:
+- 0.95
+iteration: 0
+default_net_type: resnet_101
+default_augmenter: default
+snapshotindex: -1
+detector_snapshotindex: -1
+batch_size: 8
+detector_batch_size: 1
+
+
+# Cropping Parameters (for analysis and outlier frame detection)
+cropping: false
+#if cropping is true for analysis, then set the values here:
+x1: 0
+x2: 640
+y1: 277
+y2: 624
+
+
+# Refinement configuration (parameters from annotation dataset configuration also relevant in this stage)
+corner2move2:
+- 50
+- 50
+move2corner: true
+
+
+# Conversion tables to fine-tune SuperAnimal weights
+SuperAnimalConversionTables:

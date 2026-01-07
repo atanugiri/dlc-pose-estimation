@@ -23,7 +23,7 @@ This cookbook summarizes the DeepLabCut workflow for pose estimation, based on o
 2. Activate environment: `conda activate DEEPLABCUT`
 3. Check PyTorch: Ensure GPU support if available.
 
-## Project Creation
+## Project Creation (easier with GUI [python -m deeplabcut])
 - Create a new project:
   ```python
   import deeplabcut
@@ -35,16 +35,16 @@ This cookbook summarizes the DeepLabCut workflow for pose estimation, based on o
   ```
 - Edit `config.yaml` for bodyparts, skeleton, etc.
 
-## Adding Videos
+## Adding Videos (easier with GUI)
 - Add more videos to an existing project:
   ```python
   deeplabcut.add_new_videos(config_path, [new_video_paths], copy_videos=False, extract_frames=False)
   ```
 
-## Frame Extraction
+## Frame Extraction (easier with GUI)
 - Extract frames for labeling:
   ```python
-  deeplabcut.extract_frames(config_path, mode='automatic', algo='uniform', crop='GUI', userfeedback=True)
+  deeplabcut.extract_frames(config_path, mode='automatic', algo='kmeans', crop='GUI', userfeedback=True)
   ```
 - For specific videos: Add `videos=[list_of_videos]`.
 
