@@ -41,11 +41,6 @@ metadata:
   - Midback
   - Lowerback
   - Tailbase
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
   unique_bodyparts: []
   individuals:
   - animal
@@ -122,12 +117,12 @@ runner:
       - 120
   snapshots:
     max_snapshots: 5
-    save_epochs: 25
+    save_epochs: 5
     save_optimizer_state: false
 train_settings:
   batch_size: 8
   dataloader_workers: 0
   dataloader_pin_memory: false
-  display_iters: 500
-  epochs: 200
+  display_iters: 100
+  epochs: 500
   seed: 42

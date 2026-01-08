@@ -1,25 +1,25 @@
 #!/bin/bash
-##SBATCH -A DBS25005          # project allocation code for lonestar6
+#SBATCH -A DBS25005          # project allocation code for lonestar6
 #SBATCH --job-name=dlc_gpu
 #SBATCH --output=%x-%j.out
 #SBATCH --error=%x-%j.err
-#SBATCH --partition=dgx       # GPU partition
-#SBATCH --gres=gpu:1          # request 1 GPU only for punakha
+#SBATCH --partition=gpu-100-dev       # GPU partition
+## SBATCH --gres=gpu:1          # request 1 GPU only for punakha
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=6
-#SBATCH --time=2:00:00        # 2 hours for training
+#SBATCH --time=0:30:00        # 2 hours for training
 #SBATCH --mem=16G
 
 # --- Variables ---
 export CONFIG_PATH="$WORK/Black-FoodOnly-Atanu-2026-01-06/config.yaml"
 export CONDA_ENV="$HOME/miniconda3/envs/DEEPLABCUT"
 export DEVICE="cuda:0"
-export EPOCHS=500
-export SHUFFLE=1
+export EPOCHS=200
+export SHUFFLE=2
 export TRAININGSETINDEX=0
 export VIDEOS="$WORK/Black-FoodOnly-Atanu-2026-01-06/videos/*.mp4"
-# export SNAPSHOT_PATH="$WORK/Black-FoodOnly-Atanu-2026-01-06/dlc-models-pytorch/iteration-3/DLC-Black-FoodOnlyJan06-trainset95shuffle3/train/snapshot-best-230.pt"
+export SNAPSHOT_PATH="$WORK/Black-FoodOnly-Atanu-2026-01-06/dlc-models-pytorch/iteration-0/Black-FoodOnlyJan6-trainset95shuffle1/train/snapshot-best-200.pt"
 export TASK="train"  # Options: train, evaluate, analyze, all
 
 echo "Job started on $(hostname) at $(date)"
