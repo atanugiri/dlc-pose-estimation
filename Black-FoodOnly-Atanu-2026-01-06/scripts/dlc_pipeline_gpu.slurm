@@ -8,7 +8,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=6
-#SBATCH --time=0:30:00        # 2 hours for training
+#SBATCH --time=0:15:00        # 2 hours for training
 #SBATCH --mem=16G
 
 # --- Variables ---
@@ -16,11 +16,11 @@ export CONFIG_PATH="$WORK/Black-FoodOnly-Atanu-2026-01-06/config.yaml"
 export CONDA_ENV="$SCRATCH/miniconda3/envs/dlcfix"
 export DEVICE="cuda:0"
 export EPOCHS=200
-export SHUFFLE=2
+export SHUFFLE=3
 export TRAININGSETINDEX=0
 export VIDEOS="$WORK/Black-FoodOnly-Atanu-2026-01-06/videos/*.mp4"
-export SNAPSHOT_PATH="$WORK/Black-FoodOnly-Atanu-2026-01-06/dlc-models-pytorch/iteration-0/Black-FoodOnlyJan6-trainset95shuffle1/train/snapshot-best-200.pt"
-export TASK="train"  # Options: train, evaluate, analyze, all
+export SNAPSHOT_PATH="$WORK/Black-FoodOnly-Atanu-2026-01-06/dlc-models-pytorch/iteration-0/Black-FoodOnlyJan6-trainset95shuffle3/train/snapshot-best-320.pt"
+export TASK="evaluate"  # Options: train, evaluate, analyze, all
 
 echo "Job started on $(hostname) at $(date)"
 
