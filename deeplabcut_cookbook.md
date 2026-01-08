@@ -23,48 +23,65 @@ This cookbook summarizes the DeepLabCut workflow for pose estimation, based on o
 2. Activate environment: `conda activate DEEPLABCUT`
 3. Check PyTorch: Ensure GPU support if available.
 
-## Project Creation (easier with GUI [python -m deeplabcut])
-- Create a new project:
+## Project Creation, Adding Videos, Frame Extraction, and Labeling Frames (Recommended: Use the GUI)
+
+For these steps, it is easiest to use the DeepLabCut GUI:
+
+1. Activate your conda environment:
+  ```bash
+  conda activate DEEPLABCUT
+  ```
+2. Launch the GUI:
+  ```bash
+  python -m deeplabcut
+  ```
+3. Use the GUI to:
+  - Create a new project
+  - Add videos to a project
+  - Extract frames for labeling
+  - Label frames (and refine labels)
+
+You can also do these steps programmatically if needed:
+
   ```python
   import deeplabcut
+  # Create a new project
   config_path = deeplabcut.create_new_project(
-      "ProjectName", "Scorer", [video_paths],
-      working_directory="/path/to/projects",
-      copy_videos=True, multianimal=False
+    "ProjectName", "Scorer", [video_paths],
+    working_directory="/path/to/projects",
+    copy_videos=True, multianimal=False
   )
-  ```
-- Edit `config.yaml` for bodyparts, skeleton, etc.
-
-## Adding Videos (easier with GUI)
-- Add more videos to an existing project:
-  ```python
+  # Add more videos
   deeplabcut.add_new_videos(config_path, [new_video_paths], copy_videos=False, extract_frames=False)
-  ```
-
-## Frame Extraction (easier with GUI)
-- Extract frames for labeling:
-  ```python
+  # Extract frames
   deeplabcut.extract_frames(config_path, mode='automatic', algo='kmeans', crop='GUI', userfeedback=True)
-  ```
-- For specific videos: Add `videos=[list_of_videos]`.
-
-## Labeling Frames
-- Label extracted frames (initial labeling):
-  ```python
+  # Label frames
   deeplabcut.label_frames(config_path)
-  ```
-- Refine existing labels (edit or label outliers):
-  ```python
+  # Refine labels
   deeplabcut.refine_labels(config_path)
   ```
-  - Both open the GUI, but `refine_labels` allows editing existing labels.
+
+- Edit `config.yaml` for bodyparts, skeleton, etc. as needed.
 
 ## Creating Training Dataset
 - Merge labels and create splits:
   ```python
   deeplabcut.merge_datasets(config_path)
-  deeplabcut.create_training_dataset(config_path, num_shuffles=3)  # For specific shuffle
   ```
+  Recommended: Use IPython for creating the training dataset (better for debugging and interactive work):
+
+  1. Activate your environment:
+    ```bash
+    conda activate DEEPLABCUT
+    ipython
+    ```
+  2. In IPython:
+    ```python
+    import deeplabcut
+    from pathlib import Path
+    config_path = str(Path("config.yaml").resolve())
+    deeplabcut.create_training_dataset(config_path, num_shuffles=3)
+    ```
 
 ## Training the Network
 - Train the model:
