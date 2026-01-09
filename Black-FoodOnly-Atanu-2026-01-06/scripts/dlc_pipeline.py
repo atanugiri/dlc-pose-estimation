@@ -99,7 +99,7 @@ def main():
         sys.exit(1)
 
     # For testing: limit to first 2 videos (comment out for full run)
-    selected_indices = [1, 3]
+    selected_indices = [1, 3, 5]  # Example indices
     videos = [videos[i] for i in selected_indices]
     
     print(f"Found {len(videos)} videos")

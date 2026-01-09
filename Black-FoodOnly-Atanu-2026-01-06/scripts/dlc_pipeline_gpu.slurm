@@ -19,8 +19,8 @@ export EPOCHS=200
 export SHUFFLE=3
 export TRAININGSETINDEX=0
 export VIDEOS="$WORK/Black-FoodOnly-Atanu-2026-01-06/videos/*.mp4"
-export SNAPSHOT_PATH="$WORK/Black-FoodOnly-Atanu-2026-01-06/dlc-models-pytorch/iteration-0/Black-FoodOnlyJan6-trainset95shuffle3/train/snapshot-best-320.pt"
-export TASK="evaluate"  # Options: train, evaluate, analyze, all
+export SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-3/DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-230.pt"
+export TASK="all"  # Options: train, evaluate, analyze, all
 
 echo "Job started on $(hostname) at $(date)"
 
