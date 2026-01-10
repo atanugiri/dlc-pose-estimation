@@ -49,6 +49,10 @@ video_sets:
     crop: 62, 318, 16, 270
   /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodOnly-Atanu-2026-01-06/videos/FoodOnly_8_28_24_S3P_Cyan_Trial2.mp4:
     crop: 0, 640, 0, 480
+  ? /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodOnly-Atanu-2026-01-06/videos/FoodOnly_8_28_24_S3P_Orange_Trial2.mp4
+  : crop: 0, 640, 0, 480
+  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodOnly-Atanu-2026-01-06/videos/FoodOnly_8_28_24_S3P_Teal_Trial2.mp4:
+    crop: 0, 640, 0, 480
 bodyparts:
 - Head
 - Neck
@@ -76,9 +80,18 @@ bodyparts:
 
 
 # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
 start: 0
 stop: 1
-numframes2pick: 5
+numframes2pick: 10
 
 
 # Plotting configuration
@@ -102,7 +115,7 @@ colormap: rainbow
 # Training,Evaluation and Analysis configuration
 TrainingFraction:
 - 0.95
-iteration: 3
+iteration: 4
 default_net_type: resnet_101
 default_augmenter: default
 snapshotindex: -1

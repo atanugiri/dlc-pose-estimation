@@ -1,0 +1,19 @@
+dataset: 
+  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13
+dataset_type: multi-animal-imgaug
+num_joints: 5
+all_joints:
+- - 0
+- - 1
+- - 2
+- - 3
+- - 4
+all_joints_names:
+- Head
+- Neck
+- Midback
+- Lowerback
+- Tailbase
+net_type: resnet_101
+global_scale: 1
+scoremap_dir: test

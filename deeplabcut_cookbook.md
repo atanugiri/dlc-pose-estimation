@@ -137,7 +137,9 @@ If you need to add more bodyparts (e.g., tail segments, limbs) after initial set
    ```
 
 ## Active Learning (Outliers)
-Active learning is used to improve model performance by identifying and labeling frames where the model is uncertain. Use this after initial training and evaluation if metrics are poor (e.g., RMSE >5 pixels, mAP <80%). This typically happens after the first round of training, evaluation, and analysis on videos. If the model's predictions are inaccurate or inconsistent, extract outliers, refine labels, and retrain. If mAP is already >80%, active learning is optional but can push accuracy higher.
+Active learning is used to improve model performance by identifying and labeling frames where the model is uncertain. Use this after initial training and evaluation if metrics are poor (e.g., RMSE >5 pixels, mAP <80%). This typically happens after the first round of training, evaluation, and analysis on videos. If the model's predictions are inaccurate or inconsistent, extract outliers, label them, and retrain. If mAP is already >80%, active learning is optional but can push accuracy higher.
+
+**Tip:** For labeling outlier frames, using `deeplabcut.label_frames` with the GUI is often easier and more user-friendly than `refine_labels`.
 
   ```python
   deeplabcut.extract_outlier_frames(config_path, [video_paths], outlieralgorithm='uncertain', p_bound=0.1) # use judgement for p_bound
