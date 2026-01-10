@@ -139,7 +139,6 @@ If you need to add more bodyparts (e.g., tail segments, limbs) after initial set
 ## Active Learning (Outliers)
 Active learning is used to improve model performance by identifying and labeling frames where the model is uncertain. Use this after initial training and evaluation if metrics are poor (e.g., RMSE >5 pixels, mAP <80%). This typically happens after the first round of training, evaluation, and analysis on videos. If the model's predictions are inaccurate or inconsistent, extract outliers, refine labels, and retrain. If mAP is already >80%, active learning is optional but can push accuracy higher.
 
-- Extract uncertain frames for refinement:
   ```python
   deeplabcut.extract_outlier_frames(config_path, [video_paths], outlieralgorithm='uncertain', p_bound=0.1) # use judgement for p_bound
   deeplabcut.refine_labels(config_path)  # Label outliers
@@ -147,6 +146,21 @@ Active learning is used to improve model performance by identifying and labeling
   deeplabcut.create_training_dataset(config_path)
   # Retrain
   ```
+## Lesson: Using extract_outlier_frames Across Projects
+
+### Key Points
+
+1. **Cross-Project Model Usage:** You can use a pose-estimation model trained in one DeepLabCut project for another project, provided the videos are visually similar (lighting, subjects, etc.).
+
+2. **Expect Outliers:** When you use `deeplabcut.label_videos` to validate predictions in the new project, expect some outlier frames, especially if the new videos differ in subtle ways from the training set.
+
+3. **Extract Outlier Frames:** Use `deeplabcut.extract_outlier_frames` for the videos in the new project folder to identify and extract frames where the model predictions are likely incorrect.
+
+4. **Important Directory Structure:** Ensure that the output files from `deeplabcut.analyze_videos` (e.g., `.h5` or `.csv` pose data) are present in the same directory as the corresponding video files. This is required for `extract_outlier_frames` to work correctly.
+
+---
+
+This workflow allows you to efficiently adapt and improve pose estimation for new datasets by leveraging existing models and refining them with outlier correction.
 
 ## HPC Usage
 - Sync files to HPC:

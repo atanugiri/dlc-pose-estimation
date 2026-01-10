@@ -12,8 +12,8 @@
 #SBATCH --mem=16G
 
 # --- Variables ---
-export CONFIG_PATH="$WORK/Black-FoodOnly-Atanu-2026-01-06/config.yaml"
-export CONDA_ENV="$SCRATCH/miniconda3/envs/dlcfix"
+export CONFIG_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/config.yaml"
+export CONDA_ENV="$SCRATCH/miniconda3/envs/DEEPLABCUT"
 export DEVICE="cuda:0"
 export EPOCHS=200
 export SHUFFLE=3

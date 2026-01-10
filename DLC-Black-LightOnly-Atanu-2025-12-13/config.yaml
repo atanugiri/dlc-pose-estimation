@@ -8,7 +8,7 @@ identity:
 
 # Project path (change when moving around)
 project_path: 
-  /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13
+  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13
 
 
 # Default DeepLabCut engine to use for shuffle creation (either pytorch or tensorflow)
@@ -47,12 +47,20 @@ video_sets:
     crop: 47, 318, 10, 279
   /work/10823/atanugiri2025/ls6/DLC-Black-LightOnly-Atanu-2025-12-13/videos/LightOnly_11_20_24_S1P_Teal.mp4:
     crop: 62, 318, 16, 270
+  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodOnly-Atanu-2026-01-06/videos/FoodOnly_8_28_24_S3P_Cyan_Trial2.mp4:
+    crop: 0, 640, 0, 480
 bodyparts:
 - Head
 - Neck
 - Midback
 - Lowerback
 - Tailbase
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
 
 
 # Fraction of video to start/stop when extracting frames for labeling/refinement
