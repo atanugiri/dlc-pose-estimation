@@ -18,10 +18,10 @@ export DEVICE="cuda:0"
 export EPOCHS=200
 export SHUFFLE=3
 export TRAININGSETINDEX=0
-export VIDEOS="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/*.mp4"
+export VIDEOS="$WORK/Black-FoodOnly-Atanu-2026-01-06/videos/*.mp4"
 export SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-4/\
-DLC-Black-LightOnlyDec13-trainset95shuffle2/train/snapshot-best-400.pt"
-export TASK="train"  # Options: train, evaluate, analyze, all
+DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-590.pt"
+export TASK="all"  # Options: train, evaluate, analyze, all
 
 echo "Job started on $(hostname) at $(date)"
 
