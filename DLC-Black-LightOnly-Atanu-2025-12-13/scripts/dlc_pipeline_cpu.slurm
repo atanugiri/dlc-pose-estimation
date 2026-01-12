@@ -16,9 +16,8 @@ export CONDA_ENV="$SCRATCH/miniconda3/envs/dlcfix"
 export DEVICE="cpu"                # Force CPU (no GPU on this partition)
 export SHUFFLE=3
 export TRAININGSETINDEX=0
-export VIDEOS="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/*.mp4"
-export SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-3/\
-DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-230.pt"
+export VIDEOS="$WORK/Black-FoodOnly-Atanu-2026-01-06/videos/*.mp4"
+export SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-3/DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-230.pt"
 export TASK="label_video"               # Options: filter, label_video
 
 echo "Job started on $(hostname) at $(date)"
@@ -37,6 +36,6 @@ echo "Using python: $(which python)"
 cd "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13"
 
 # Run DeepLabCut pipeline
-python "$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/scripts/dlc_pipeline.py"
+python "$WORK/Black-FoodOnly-Atanu-2026-01-06/scripts/dlc_pipeline.py"
 
 echo "Job completed at $(date)"
