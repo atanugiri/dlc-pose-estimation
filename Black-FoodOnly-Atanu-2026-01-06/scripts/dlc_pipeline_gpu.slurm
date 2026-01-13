@@ -8,7 +8,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=6
-#SBATCH --time=0:15:00        # 2 hours for training
+#SBATCH --time=0:30:00        # 2 hours for training
 #SBATCH --mem=16G
 
 # --- Variables ---

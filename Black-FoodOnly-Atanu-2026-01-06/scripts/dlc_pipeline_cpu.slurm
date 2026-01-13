@@ -12,13 +12,14 @@
 
 # --- Variables ---
 export CONFIG_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/config.yaml"
-export CONDA_ENV="$SCRATCH/miniconda3/envs/dlcfix"
+export CONDA_ENV="$SCRATCH/miniconda3/envs/DEEPLABCUT"
 export DEVICE="cpu"                # Force CPU (no GPU on this partition)
 export SHUFFLE=3
 export TRAININGSETINDEX=0
 export VIDEOS="$WORK/Black-FoodOnly-Atanu-2026-01-06/videos/*.mp4"
-export SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-3/DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-230.pt"
-export TASK="label_video"               # Options: filter, label_video
+export SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-4/\
+DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-590.pt"
+export TASK="filter"               # Options: filter, label_video
 
 echo "Job started on $(hostname) at $(date)"
 
