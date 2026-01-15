@@ -16,11 +16,11 @@ export CONFIG_PATH="$WORK/Black-FoodLight-Atanu-2026-01-15/config.yaml"
 export CONDA_ENV="$SCRATCH/miniconda3/envs/DEEPLABCUT"
 export DEVICE="cuda:0"
 export EPOCHS=200
-export SHUFFLE=1
+export SHUFFLE=2
 export TRAININGSETINDEX=0
 export VIDEOS="$WORK/Black-FoodLight-Atanu-2026-01-15/videos/*.mp4"
-# export SNAPSHOT_PATH="$WORK/Black-FoodLight-Atanu-2026-01-15/dlc-models-pytorch/iteration-0/\
-# Black-FoodLightJan15-trainset95shuffle3/train/snapshot-best-590.pt"
+export SNAPSHOT_PATH="$WORK/Black-FoodLight-Atanu-2026-01-15/dlc-models-pytorch/iteration-0/\
+Black-FoodLightJan15-trainset95shuffle1/train/snapshot-best-050.pt"
 export TASK="train"  # Options: train, evaluate, analyze, all
 
 echo "Job started on $(hostname) at $(date)"
@@ -43,7 +43,7 @@ nvidia-smi --query-gpu=index,memory.used,memory.total,utilization.gpu --format=c
 cd "$WORK/Black-FoodLight-Atanu-2026-01-15"
 
 # Run DeepLabCut pipeline
-python "$WORK/Black-FoodLight-Atanu-2026-01-15/scripts/dlc_pipeline.py"
+python "$WORK/scripts/dlc_pipeline.py"
 
 # Check GPU status after task
 echo "GPU status after task:"
