@@ -8,7 +8,7 @@ identity:
 
 # Project path (change when moving around)
 project_path: 
-  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15
+  /work/10823/atanugiri2025/ls6/Black-FoodLight-Atanu-2026-01-15
 
 
 # Default DeepLabCut engine to use for shuffle creation (either pytorch or tensorflow)
@@ -17,29 +17,29 @@ engine: pytorch
 
 # Annotation data set configuration (and individual video cropping parameters)
 video_sets:
-  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_9_24_P_Azul.mp4:
+  /work/10823/atanugiri2025/ls6/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_9_24_P_Azul.mp4:
     crop: 86, 245, 85, 242
-  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_9_24_P_Navy.mp4:
+  /work/10823/atanugiri2025/ls6/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_9_24_P_Navy.mp4:
     crop: 87, 244, 84, 242
-  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_9_24_P_Tan.mp4:
+  /work/10823/atanugiri2025/ls6/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_9_24_P_Tan.mp4:
     crop: 84, 244, 85, 242
-  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_9_24_Y_Cyan.mp4:
+  /work/10823/atanugiri2025/ls6/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_9_24_Y_Cyan.mp4:
     crop: 84, 245, 84, 242
-  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_9_24_Y_Orange.mp4:
+  /work/10823/atanugiri2025/ls6/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_9_24_Y_Orange.mp4:
     crop: 84, 244, 85, 242
-  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_9_24_Y_Teal.mp4:
+  /work/10823/atanugiri2025/ls6/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_9_24_Y_Teal.mp4:
     crop: 87, 244, 84, 243
-  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_P_Pinky.mp4:
+  /work/10823/atanugiri2025/ls6/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_P_Pinky.mp4:
     crop: 83, 244, 83, 241
-  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_P_Sage.mp4:
+  /work/10823/atanugiri2025/ls6/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_P_Sage.mp4:
     crop: 84, 244, 84, 242
-  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_P_Sky.mp4:
+  /work/10823/atanugiri2025/ls6/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_P_Sky.mp4:
     crop: 86, 244, 85, 243
-  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_Y_Indigo.mp4:
+  /work/10823/atanugiri2025/ls6/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_Y_Indigo.mp4:
     crop: 83, 245, 85, 242
-  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_Y_Lilac.mp4:
+  /work/10823/atanugiri2025/ls6/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_Y_Lilac.mp4:
     crop: 86, 244, 85, 242
-  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_Y_Violet.mp4:
+  /work/10823/atanugiri2025/ls6/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_Y_Violet.mp4:
     crop: 83, 244, 84, 242
 bodyparts:
 - Head
