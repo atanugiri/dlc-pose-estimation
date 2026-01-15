@@ -67,7 +67,7 @@ bodyparts:
 # Fraction of video to start/stop when extracting frames for labeling/refinement
 start: 0
 stop: 1
-numframes2pick: 10
+numframes2pick: 5
 
 
 # Plotting configuration

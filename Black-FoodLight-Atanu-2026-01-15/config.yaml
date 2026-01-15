@@ -20,27 +20,32 @@ video_sets:
   /Users/atanugiri/Downloads/BlackAnimalsData/SplitVideos/videos/FoodLight_9_9_24_P_Azul.mp4:
     crop: 0, 340, 0, 336
 bodyparts:
-- bodypart1
-- bodypart2
-- bodypart3
-- objectA
+- Head
+- Neck
+- Midback
+- Lowerback
+- Tailbase
 
 
 # Fraction of video to start/stop when extracting frames for labeling/refinement
 start: 0
 stop: 1
-numframes2pick: 20
+numframes2pick: 5
 
 
 # Plotting configuration
 skeleton:
-- - bodypart1
-  - bodypart2
-- - objectA
-  - bodypart3
+- - Head
+  - Neck
+- - Neck
+  - Midback
+- - Midback
+  - Lowerback
+- - Lowerback
+  - Tailbase
 skeleton_color: black
 pcutoff: 0.6
-dotsize: 12
+dotsize: 6
 alphavalue: 0.7
 colormap: rainbow
 
@@ -49,7 +54,7 @@ colormap: rainbow
 TrainingFraction:
 - 0.95
 iteration: 0
-default_net_type: resnet_50
+default_net_type: resnet_101
 default_augmenter: default
 snapshotindex: -1
 detector_snapshotindex: -1
