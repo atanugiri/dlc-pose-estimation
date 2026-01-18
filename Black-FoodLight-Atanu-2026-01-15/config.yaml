@@ -41,24 +41,22 @@ video_sets:
     crop: 86, 244, 85, 242
   /work/agiri/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_Y_Violet.mp4:
     crop: 83, 244, 84, 242
+  # /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_P_Pinky.mp4:
+  #   crop: 0, 340, 0, 336
+  # /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_P_Sage.mp4:
+  #   crop: 0, 340, 0, 336
+  # /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_P_Sky.mp4:
+  #   crop: 0, 340, 0, 336
+  # /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_Y_Indigo.mp4:
+  #   crop: 0, 340, 0, 336
+  # /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_Y_Lilac.mp4:
+  #   crop: 0, 340, 0, 336
 bodyparts:
 - Head
 - Neck
 - Midback
 - Lowerback
 - Tailbase
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
 
 
 # Fraction of video to start/stop when extracting frames for labeling/refinement
@@ -93,7 +91,7 @@ colormap: rainbow
 # Training,Evaluation and Analysis configuration
 TrainingFraction:
 - 0.95
-iteration: 1
+iteration: 2
 default_net_type: resnet_101
 default_augmenter: default
 snapshotindex: -1

@@ -11,6 +11,8 @@ if not data_dir.exists():
     exit(1)
 else:
     print(f"Data directory exists: {data_dir}")
-
-for v in sorted(data_dir.iterdir()):
-    print(f"Found file: {v.name}")
+mp4_videos = sorted([f for f in data_dir.iterdir() if f.is_file() and f.suffix == ".mp4"])
+first_five = [str(f) for f in mp4_videos[:5]]
+print("First 5 sorted .mp4 videos:")
+for v in first_five:
+    print(f"Found file: {v}")
