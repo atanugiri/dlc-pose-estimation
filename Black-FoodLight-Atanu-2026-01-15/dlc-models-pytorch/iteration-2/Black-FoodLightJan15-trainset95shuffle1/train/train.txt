@@ -1,0 +1,443 @@
+2026-01-18 10:26:14 Training with configuration:
+2026-01-18 10:26:14 data:
+2026-01-18 10:26:14   bbox_margin: 20
+2026-01-18 10:26:14   colormode: RGB
+2026-01-18 10:26:14   inference:
+2026-01-18 10:26:14     normalize_images: True
+2026-01-18 10:26:14   train:
+2026-01-18 10:26:14     affine:
+2026-01-18 10:26:14       p: 0.5
+2026-01-18 10:26:14       rotation: 30
+2026-01-18 10:26:14       scaling: [0.5, 1.25]
+2026-01-18 10:26:14       translation: 0
+2026-01-18 10:26:14     crop_sampling:
+2026-01-18 10:26:14       width: 448
+2026-01-18 10:26:14       height: 448
+2026-01-18 10:26:14       max_shift: 0.1
+2026-01-18 10:26:14       method: hybrid
+2026-01-18 10:26:14     gaussian_noise: 12.75
+2026-01-18 10:26:14     motion_blur: True
+2026-01-18 10:26:14     normalize_images: True
+2026-01-18 10:26:14 device: auto
+2026-01-18 10:26:14 inference:
+2026-01-18 10:26:14   multithreading:
+2026-01-18 10:26:14     enabled: True
+2026-01-18 10:26:14     queue_length: 4
+2026-01-18 10:26:14     timeout: 30.0
+2026-01-18 10:26:14   compile:
+2026-01-18 10:26:14     enabled: False
+2026-01-18 10:26:14     backend: inductor
+2026-01-18 10:26:14   autocast:
+2026-01-18 10:26:14     enabled: False
+2026-01-18 10:26:14 metadata:
+2026-01-18 10:26:14   project_path: /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15
+2026-01-18 10:26:14   pose_config_path: /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15/dlc-models-pytorch/iteration-2/Black-FoodLightJan15-trainset95shuffle1/train/pytorch_config.yaml
+2026-01-18 10:26:14   bodyparts: ['Head', 'Neck', 'Midback', 'Lowerback', 'Tailbase']
+2026-01-18 10:26:14   unique_bodyparts: []
+2026-01-18 10:26:14   individuals: ['animal']
+2026-01-18 10:26:14   with_identity: None
+2026-01-18 10:26:14 method: bu
+2026-01-18 10:26:14 model:
+2026-01-18 10:26:14   backbone:
+2026-01-18 10:26:14     type: ResNet
+2026-01-18 10:26:14     model_name: resnet101
+2026-01-18 10:26:14     output_stride: 16
+2026-01-18 10:26:14     freeze_bn_stats: False
+2026-01-18 10:26:14     freeze_bn_weights: False
+2026-01-18 10:26:14   backbone_output_channels: 2048
+2026-01-18 10:26:14   heads:
+2026-01-18 10:26:14     bodypart:
+2026-01-18 10:26:14       type: HeatmapHead
+2026-01-18 10:26:14       weight_init: normal
+2026-01-18 10:26:14       predictor:
+2026-01-18 10:26:14         type: HeatmapPredictor
+2026-01-18 10:26:14         apply_sigmoid: False
+2026-01-18 10:26:14         clip_scores: True
+2026-01-18 10:26:14         location_refinement: True
+2026-01-18 10:26:14         locref_std: 7.2801
+2026-01-18 10:26:14       target_generator:
+2026-01-18 10:26:14         type: HeatmapGaussianGenerator
+2026-01-18 10:26:14         num_heatmaps: 5
+2026-01-18 10:26:14         pos_dist_thresh: 17
+2026-01-18 10:26:14         heatmap_mode: KEYPOINT
+2026-01-18 10:26:14         gradient_masking: False
+2026-01-18 10:26:14         generate_locref: True
+2026-01-18 10:26:14         locref_std: 7.2801
+2026-01-18 10:26:14       criterion:
+2026-01-18 10:26:14         heatmap:
+2026-01-18 10:26:14           type: WeightedMSECriterion
+2026-01-18 10:26:14           weight: 1.0
+2026-01-18 10:26:14         locref:
+2026-01-18 10:26:14           type: WeightedHuberCriterion
+2026-01-18 10:26:14           weight: 0.05
+2026-01-18 10:26:14       heatmap_config:
+2026-01-18 10:26:14         channels: [2048, 5]
+2026-01-18 10:26:14         kernel_size: [3]
+2026-01-18 10:26:14         strides: [2]
+2026-01-18 10:26:14       locref_config:
+2026-01-18 10:26:14         channels: [2048, 10]
+2026-01-18 10:26:14         kernel_size: [3]
+2026-01-18 10:26:14         strides: [2]
+2026-01-18 10:26:14 net_type: resnet_101
+2026-01-18 10:26:14 runner:
+2026-01-18 10:26:14   type: PoseTrainingRunner
+2026-01-18 10:26:14   gpus: None
+2026-01-18 10:26:14   key_metric: test.mAP
+2026-01-18 10:26:14   key_metric_asc: True
+2026-01-18 10:26:14   eval_interval: 10
+2026-01-18 10:26:14   optimizer:
+2026-01-18 10:26:14     type: AdamW
+2026-01-18 10:26:14     params:
+2026-01-18 10:26:14       lr: 0.0005
+2026-01-18 10:26:14   scheduler:
+2026-01-18 10:26:14     type: LRListScheduler
+2026-01-18 10:26:14     params:
+2026-01-18 10:26:14       lr_list: [[0.0001], [1e-05]]
+2026-01-18 10:26:14       milestones: [90, 120]
+2026-01-18 10:26:14   snapshots:
+2026-01-18 10:26:14     max_snapshots: 5
+2026-01-18 10:26:14     save_epochs: 5
+2026-01-18 10:26:14     save_optimizer_state: False
+2026-01-18 10:26:14 train_settings:
+2026-01-18 10:26:14   batch_size: 8
+2026-01-18 10:26:14   dataloader_workers: 0
+2026-01-18 10:26:14   dataloader_pin_memory: False
+2026-01-18 10:26:14   display_iters: 100
+2026-01-18 10:26:14   epochs: 200
+2026-01-18 10:26:14   seed: 42
+2026-01-18 10:26:15 Data Transforms:
+2026-01-18 10:26:15   Training:   Compose([
+  Affine(always_apply=False, p=0.5, interpolation=1, mask_interpolation=0, cval=0, mode=0, scale={'x': (0.5, 1.25), 'y': (0.5, 1.25)}, translate_percent=None, translate_px={'x': (0, 0), 'y': (0, 0)}, rotate=(-30, 30), fit_output=False, shear={'x': (0.0, 0.0), 'y': (0.0, 0.0)}, cval_mask=0, keep_ratio=True, rotate_method='largest_box'),
+  PadIfNeeded(always_apply=True, p=1.0, min_height=448, min_width=448, pad_height_divisor=None, pad_width_divisor=None, position=PositionType.CENTER, border_mode=0, value=None, mask_value=None),
+  KeypointAwareCrop(always_apply=True, p=1.0, width=448, height=448, max_shift=0.1, crop_sampling='hybrid'),
+  MotionBlur(always_apply=False, p=0.5, blur_limit=(3, 7), allow_shifted=True),
+  GaussNoise(always_apply=False, p=0.5, var_limit=(0, 162.5625), per_channel=True, mean=0),
+  Normalize(always_apply=False, p=1.0, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], max_pixel_value=255.0),
+], p=1.0, bbox_params={'format': 'coco', 'label_fields': ['bbox_labels'], 'min_area': 0.0, 'min_visibility': 0.0, 'min_width': 0.0, 'min_height': 0.0, 'check_each_transform': True}, keypoint_params={'format': 'xy', 'label_fields': ['class_labels'], 'remove_invisible': False, 'angle_in_degrees': True, 'check_each_transform': True}, additional_targets={}, is_check_shapes=True)
+2026-01-18 10:26:15   Validation: Compose([
+  Normalize(always_apply=False, p=1.0, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], max_pixel_value=255.0),
+], p=1.0, bbox_params={'format': 'coco', 'label_fields': ['bbox_labels'], 'min_area': 0.0, 'min_visibility': 0.0, 'min_width': 0.0, 'min_height': 0.0, 'check_each_transform': True}, keypoint_params={'format': 'xy', 'label_fields': ['class_labels'], 'remove_invisible': False, 'angle_in_degrees': True, 'check_each_transform': True}, additional_targets={}, is_check_shapes=True)
+2026-01-18 10:26:16 Using 137 images and 8 for testing
+2026-01-18 10:26:16 
+Starting pose model training...
+--------------------------------------------------
+2026-01-18 10:26:19 Epoch 181/380 (lr=1e-05), train loss 0.00228, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:21 Epoch 182/380 (lr=1e-05), train loss 0.00307, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:23 Epoch 183/380 (lr=1e-05), train loss 0.00205, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:25 Epoch 184/380 (lr=1e-05), train loss 0.00237, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:27 Epoch 185/380 (lr=1e-05), train loss 0.00227, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:29 Epoch 186/380 (lr=1e-05), train loss 0.00205, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:31 Epoch 187/380 (lr=1e-05), train loss 0.00291, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:33 Epoch 188/380 (lr=1e-05), train loss 0.00212, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:35 Epoch 189/380 (lr=1e-05), train loss 0.00232, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:37 Training for epoch 190 done, starting evaluation
+2026-01-18 10:26:38 Epoch 190/380 (lr=1e-05), train loss 0.00264, valid loss 0.00421, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:38 Model performance:
+2026-01-18 10:26:38   metrics/test.rmse:           7.76
+2026-01-18 10:26:38   metrics/test.rmse_pcutoff:   6.33
+2026-01-18 10:26:38   metrics/test.mAP:            7.08
+2026-01-18 10:26:38   metrics/test.mAR:           17.50
+2026-01-18 10:26:40 Epoch 191/380 (lr=1e-05), train loss 0.00199, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:42 Epoch 192/380 (lr=1e-05), train loss 0.00215, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:44 Epoch 193/380 (lr=1e-05), train loss 0.00187, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:46 Epoch 194/380 (lr=1e-05), train loss 0.00196, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:48 Epoch 195/380 (lr=1e-05), train loss 0.00180, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:50 Epoch 196/380 (lr=1e-05), train loss 0.00184, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:52 Epoch 197/380 (lr=1e-05), train loss 0.00187, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:54 Epoch 198/380 (lr=1e-05), train loss 0.00224, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:56 Epoch 199/380 (lr=1e-05), train loss 0.00203, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:58 Training for epoch 200 done, starting evaluation
+2026-01-18 10:26:59 Epoch 200/380 (lr=1e-05), train loss 0.00240, valid loss 0.00381, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:26:59 Model performance:
+2026-01-18 10:26:59   metrics/test.rmse:           7.38
+2026-01-18 10:26:59   metrics/test.rmse_pcutoff:   5.87
+2026-01-18 10:26:59   metrics/test.mAP:            4.64
+2026-01-18 10:26:59   metrics/test.mAR:           16.25
+2026-01-18 10:27:00 Epoch 201/380 (lr=1e-05), train loss 0.00197, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:03 Epoch 202/380 (lr=1e-05), train loss 0.00179, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:05 Epoch 203/380 (lr=1e-05), train loss 0.00170, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:07 Epoch 204/380 (lr=1e-05), train loss 0.00257, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:09 Epoch 205/380 (lr=1e-05), train loss 0.00176, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:11 Epoch 206/380 (lr=1e-05), train loss 0.00177, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:13 Epoch 207/380 (lr=1e-05), train loss 0.00190, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:15 Epoch 208/380 (lr=1e-05), train loss 0.00194, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:17 Epoch 209/380 (lr=1e-05), train loss 0.00160, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:19 Training for epoch 210 done, starting evaluation
+2026-01-18 10:27:19 Epoch 210/380 (lr=1e-05), train loss 0.00181, valid loss 0.00370, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:19 Model performance:
+2026-01-18 10:27:19   metrics/test.rmse:           6.18
+2026-01-18 10:27:19   metrics/test.rmse_pcutoff:   5.96
+2026-01-18 10:27:19   metrics/test.mAP:            8.38
+2026-01-18 10:27:19   metrics/test.mAR:           17.50
+2026-01-18 10:27:21 Epoch 211/380 (lr=1e-05), train loss 0.00191, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:23 Epoch 212/380 (lr=1e-05), train loss 0.00193, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:25 Epoch 213/380 (lr=1e-05), train loss 0.00171, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:27 Epoch 214/380 (lr=1e-05), train loss 0.00189, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:29 Epoch 215/380 (lr=1e-05), train loss 0.00194, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:31 Epoch 216/380 (lr=1e-05), train loss 0.00165, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:33 Epoch 217/380 (lr=1e-05), train loss 0.00158, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:35 Epoch 218/380 (lr=1e-05), train loss 0.00151, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:37 Epoch 219/380 (lr=1e-05), train loss 0.00192, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:39 Training for epoch 220 done, starting evaluation
+2026-01-18 10:27:40 Epoch 220/380 (lr=1e-05), train loss 0.00179, valid loss 0.00355, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:40 Model performance:
+2026-01-18 10:27:40   metrics/test.rmse:           4.76
+2026-01-18 10:27:40   metrics/test.rmse_pcutoff:   5.82
+2026-01-18 10:27:40   metrics/test.mAP:           12.33
+2026-01-18 10:27:40   metrics/test.mAR:           26.25
+2026-01-18 10:27:42 Epoch 221/380 (lr=1e-05), train loss 0.00215, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:44 Epoch 222/380 (lr=1e-05), train loss 0.00171, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:45 Epoch 223/380 (lr=1e-05), train loss 0.00199, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:47 Epoch 224/380 (lr=1e-05), train loss 0.00220, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:50 Epoch 225/380 (lr=1e-05), train loss 0.00230, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:52 Epoch 226/380 (lr=1e-05), train loss 0.00170, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:54 Epoch 227/380 (lr=1e-05), train loss 0.00154, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:56 Epoch 228/380 (lr=1e-05), train loss 0.00182, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:57 Epoch 229/380 (lr=1e-05), train loss 0.00194, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:27:59 Training for epoch 230 done, starting evaluation
+2026-01-18 10:28:00 Epoch 230/380 (lr=1e-05), train loss 0.00167, valid loss 0.00352, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:00 Model performance:
+2026-01-18 10:28:00   metrics/test.rmse:           4.81
+2026-01-18 10:28:00   metrics/test.rmse_pcutoff:   5.82
+2026-01-18 10:28:00   metrics/test.mAP:           16.23
+2026-01-18 10:28:00   metrics/test.mAR:           25.00
+2026-01-18 10:28:02 Epoch 231/380 (lr=1e-05), train loss 0.00155, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:04 Epoch 232/380 (lr=1e-05), train loss 0.00169, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:06 Epoch 233/380 (lr=1e-05), train loss 0.00234, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:08 Epoch 234/380 (lr=1e-05), train loss 0.00187, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:10 Epoch 235/380 (lr=1e-05), train loss 0.00153, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:12 Epoch 236/380 (lr=1e-05), train loss 0.00176, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:14 Epoch 237/380 (lr=1e-05), train loss 0.00198, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:16 Epoch 238/380 (lr=1e-05), train loss 0.00157, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:18 Epoch 239/380 (lr=1e-05), train loss 0.00147, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:20 Training for epoch 240 done, starting evaluation
+2026-01-18 10:28:20 Epoch 240/380 (lr=1e-05), train loss 0.00154, valid loss 0.00344, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:20 Model performance:
+2026-01-18 10:28:20   metrics/test.rmse:           4.79
+2026-01-18 10:28:20   metrics/test.rmse_pcutoff:   5.42
+2026-01-18 10:28:20   metrics/test.mAP:           14.31
+2026-01-18 10:28:20   metrics/test.mAR:           22.50
+2026-01-18 10:28:22 Epoch 241/380 (lr=1e-05), train loss 0.00154, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:24 Epoch 242/380 (lr=1e-05), train loss 0.00183, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:26 Epoch 243/380 (lr=1e-05), train loss 0.00144, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:28 Epoch 244/380 (lr=1e-05), train loss 0.00147, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:31 Epoch 245/380 (lr=1e-05), train loss 0.00167, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:33 Epoch 246/380 (lr=1e-05), train loss 0.00197, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:34 Epoch 247/380 (lr=1e-05), train loss 0.00136, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:36 Epoch 248/380 (lr=1e-05), train loss 0.00142, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:38 Epoch 249/380 (lr=1e-05), train loss 0.00165, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:40 Training for epoch 250 done, starting evaluation
+2026-01-18 10:28:41 Epoch 250/380 (lr=1e-05), train loss 0.00149, valid loss 0.00330, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:41 Model performance:
+2026-01-18 10:28:41   metrics/test.rmse:           4.51
+2026-01-18 10:28:41   metrics/test.rmse_pcutoff:   5.44
+2026-01-18 10:28:41   metrics/test.mAP:           14.21
+2026-01-18 10:28:41   metrics/test.mAR:           28.75
+2026-01-18 10:28:43 Epoch 251/380 (lr=1e-05), train loss 0.00148, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:45 Epoch 252/380 (lr=1e-05), train loss 0.00166, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:47 Epoch 253/380 (lr=1e-05), train loss 0.00171, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:49 Epoch 254/380 (lr=1e-05), train loss 0.00155, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:51 Epoch 255/380 (lr=1e-05), train loss 0.00159, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:53 Epoch 256/380 (lr=1e-05), train loss 0.00155, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:55 Epoch 257/380 (lr=1e-05), train loss 0.00144, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:57 Epoch 258/380 (lr=1e-05), train loss 0.00143, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:28:59 Epoch 259/380 (lr=1e-05), train loss 0.00188, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:01 Training for epoch 260 done, starting evaluation
+2026-01-18 10:29:02 Epoch 260/380 (lr=1e-05), train loss 0.00176, valid loss 0.00318, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:02 Model performance:
+2026-01-18 10:29:02   metrics/test.rmse:           4.50
+2026-01-18 10:29:02   metrics/test.rmse_pcutoff:   4.95
+2026-01-18 10:29:02   metrics/test.mAP:           18.49
+2026-01-18 10:29:02   metrics/test.mAR:           30.00
+2026-01-18 10:29:04 Epoch 261/380 (lr=1e-05), train loss 0.00171, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:06 Epoch 262/380 (lr=1e-05), train loss 0.00155, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:07 Epoch 263/380 (lr=1e-05), train loss 0.00188, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:09 Epoch 264/380 (lr=1e-05), train loss 0.00160, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:12 Epoch 265/380 (lr=1e-05), train loss 0.00138, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:14 Epoch 266/380 (lr=1e-05), train loss 0.00148, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:16 Epoch 267/380 (lr=1e-05), train loss 0.00183, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:18 Epoch 268/380 (lr=1e-05), train loss 0.00150, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:20 Epoch 269/380 (lr=1e-05), train loss 0.00157, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:22 Training for epoch 270 done, starting evaluation
+2026-01-18 10:29:22 Epoch 270/380 (lr=1e-05), train loss 0.00161, valid loss 0.00294, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:22 Model performance:
+2026-01-18 10:29:22   metrics/test.rmse:           3.90
+2026-01-18 10:29:22   metrics/test.rmse_pcutoff:   3.92
+2026-01-18 10:29:22   metrics/test.mAP:           21.46
+2026-01-18 10:29:22   metrics/test.mAR:           36.25
+2026-01-18 10:29:24 Epoch 271/380 (lr=1e-05), train loss 0.00145, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:26 Epoch 272/380 (lr=1e-05), train loss 0.00142, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:28 Epoch 273/380 (lr=1e-05), train loss 0.00185, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:30 Epoch 274/380 (lr=1e-05), train loss 0.00144, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:33 Epoch 275/380 (lr=1e-05), train loss 0.00142, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:35 Epoch 276/380 (lr=1e-05), train loss 0.00156, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:37 Epoch 277/380 (lr=1e-05), train loss 0.00147, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:39 Epoch 278/380 (lr=1e-05), train loss 0.00161, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:41 Epoch 279/380 (lr=1e-05), train loss 0.00151, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:43 Training for epoch 280 done, starting evaluation
+2026-01-18 10:29:43 Epoch 280/380 (lr=1e-05), train loss 0.00127, valid loss 0.00295, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:43 Model performance:
+2026-01-18 10:29:43   metrics/test.rmse:           3.93
+2026-01-18 10:29:43   metrics/test.rmse_pcutoff:   4.01
+2026-01-18 10:29:43   metrics/test.mAP:           22.07
+2026-01-18 10:29:43   metrics/test.mAR:           32.50
+2026-01-18 10:29:45 Epoch 281/380 (lr=1e-05), train loss 0.00138, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:47 Epoch 282/380 (lr=1e-05), train loss 0.00156, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:49 Epoch 283/380 (lr=1e-05), train loss 0.00143, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:51 Epoch 284/380 (lr=1e-05), train loss 0.00154, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:54 Epoch 285/380 (lr=1e-05), train loss 0.00129, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:56 Epoch 286/380 (lr=1e-05), train loss 0.00141, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:29:58 Epoch 287/380 (lr=1e-05), train loss 0.00135, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:00 Epoch 288/380 (lr=1e-05), train loss 0.00141, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:02 Epoch 289/380 (lr=1e-05), train loss 0.00133, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:04 Training for epoch 290 done, starting evaluation
+2026-01-18 10:30:04 Epoch 290/380 (lr=1e-05), train loss 0.00149, valid loss 0.00275, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:04 Model performance:
+2026-01-18 10:30:04   metrics/test.rmse:           3.69
+2026-01-18 10:30:04   metrics/test.rmse_pcutoff:   3.72
+2026-01-18 10:30:04   metrics/test.mAP:           23.96
+2026-01-18 10:30:04   metrics/test.mAR:           36.25
+2026-01-18 10:30:06 Epoch 291/380 (lr=1e-05), train loss 0.00151, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:08 Epoch 292/380 (lr=1e-05), train loss 0.00135, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:10 Epoch 293/380 (lr=1e-05), train loss 0.00185, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:12 Epoch 294/380 (lr=1e-05), train loss 0.00155, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:14 Epoch 295/380 (lr=1e-05), train loss 0.00167, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:16 Epoch 296/380 (lr=1e-05), train loss 0.00147, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:18 Epoch 297/380 (lr=1e-05), train loss 0.00133, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:20 Epoch 298/380 (lr=1e-05), train loss 0.00144, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:22 Epoch 299/380 (lr=1e-05), train loss 0.00140, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:24 Training for epoch 300 done, starting evaluation
+2026-01-18 10:30:25 Epoch 300/380 (lr=1e-05), train loss 0.00146, valid loss 0.00291, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:25 Model performance:
+2026-01-18 10:30:25   metrics/test.rmse:           3.91
+2026-01-18 10:30:25   metrics/test.rmse_pcutoff:   3.69
+2026-01-18 10:30:25   metrics/test.mAP:           18.61
+2026-01-18 10:30:25   metrics/test.mAR:           32.50
+2026-01-18 10:30:27 Epoch 301/380 (lr=1e-05), train loss 0.00124, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:29 Epoch 302/380 (lr=1e-05), train loss 0.00129, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:31 Epoch 303/380 (lr=1e-05), train loss 0.00142, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:33 Epoch 304/380 (lr=1e-05), train loss 0.00132, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:35 Epoch 305/380 (lr=1e-05), train loss 0.00128, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:37 Epoch 306/380 (lr=1e-05), train loss 0.00132, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:39 Epoch 307/380 (lr=1e-05), train loss 0.00142, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:41 Epoch 308/380 (lr=1e-05), train loss 0.00121, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:43 Epoch 309/380 (lr=1e-05), train loss 0.00145, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:45 Training for epoch 310 done, starting evaluation
+2026-01-18 10:30:46 Epoch 310/380 (lr=1e-05), train loss 0.00154, valid loss 0.00286, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:46 Model performance:
+2026-01-18 10:30:46   metrics/test.rmse:           3.64
+2026-01-18 10:30:46   metrics/test.rmse_pcutoff:   3.74
+2026-01-18 10:30:46   metrics/test.mAP:           29.73
+2026-01-18 10:30:46   metrics/test.mAR:           41.25
+2026-01-18 10:30:48 Epoch 311/380 (lr=1e-05), train loss 0.00129, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:50 Epoch 312/380 (lr=1e-05), train loss 0.00124, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:52 Epoch 313/380 (lr=1e-05), train loss 0.00130, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:54 Epoch 314/380 (lr=1e-05), train loss 0.00144, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:56 Epoch 315/380 (lr=1e-05), train loss 0.00142, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:30:58 Epoch 316/380 (lr=1e-05), train loss 0.00121, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:00 Epoch 317/380 (lr=1e-05), train loss 0.00124, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:02 Epoch 318/380 (lr=1e-05), train loss 0.00148, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:04 Epoch 319/380 (lr=1e-05), train loss 0.00145, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:06 Training for epoch 320 done, starting evaluation
+2026-01-18 10:31:07 Epoch 320/380 (lr=1e-05), train loss 0.00120, valid loss 0.00291, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:07 Model performance:
+2026-01-18 10:31:07   metrics/test.rmse:           3.99
+2026-01-18 10:31:07   metrics/test.rmse_pcutoff:   3.82
+2026-01-18 10:31:07   metrics/test.mAP:           22.00
+2026-01-18 10:31:07   metrics/test.mAR:           30.00
+2026-01-18 10:31:08 Epoch 321/380 (lr=1e-05), train loss 0.00152, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:10 Epoch 322/380 (lr=1e-05), train loss 0.00113, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:12 Epoch 323/380 (lr=1e-05), train loss 0.00155, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:14 Epoch 324/380 (lr=1e-05), train loss 0.00138, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:17 Epoch 325/380 (lr=1e-05), train loss 0.00122, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:19 Epoch 326/380 (lr=1e-05), train loss 0.00139, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:21 Epoch 327/380 (lr=1e-05), train loss 0.00125, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:23 Epoch 328/380 (lr=1e-05), train loss 0.00135, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:25 Epoch 329/380 (lr=1e-05), train loss 0.00151, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:27 Training for epoch 330 done, starting evaluation
+2026-01-18 10:31:27 Epoch 330/380 (lr=1e-05), train loss 0.00151, valid loss 0.00264, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:27 Model performance:
+2026-01-18 10:31:27   metrics/test.rmse:           3.44
+2026-01-18 10:31:27   metrics/test.rmse_pcutoff:   3.44
+2026-01-18 10:31:27   metrics/test.mAP:           31.45
+2026-01-18 10:31:27   metrics/test.mAR:           41.25
+2026-01-18 10:31:29 Epoch 331/380 (lr=1e-05), train loss 0.00114, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:31 Epoch 332/380 (lr=1e-05), train loss 0.00140, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:33 Epoch 333/380 (lr=1e-05), train loss 0.00159, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:35 Epoch 334/380 (lr=1e-05), train loss 0.00108, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:37 Epoch 335/380 (lr=1e-05), train loss 0.00136, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:39 Epoch 336/380 (lr=1e-05), train loss 0.00124, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:41 Epoch 337/380 (lr=1e-05), train loss 0.00131, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:43 Epoch 338/380 (lr=1e-05), train loss 0.00134, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:45 Epoch 339/380 (lr=1e-05), train loss 0.00130, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:47 Training for epoch 340 done, starting evaluation
+2026-01-18 10:31:47 Epoch 340/380 (lr=1e-05), train loss 0.00131, valid loss 0.00273, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:47 Model performance:
+2026-01-18 10:31:47   metrics/test.rmse:           3.71
+2026-01-18 10:31:47   metrics/test.rmse_pcutoff:   3.56
+2026-01-18 10:31:47   metrics/test.mAP:           28.07
+2026-01-18 10:31:47   metrics/test.mAR:           37.50
+2026-01-18 10:31:49 Epoch 341/380 (lr=1e-05), train loss 0.00133, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:51 Epoch 342/380 (lr=1e-05), train loss 0.00123, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:53 Epoch 343/380 (lr=1e-05), train loss 0.00130, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:55 Epoch 344/380 (lr=1e-05), train loss 0.00123, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:31:58 Epoch 345/380 (lr=1e-05), train loss 0.00121, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:00 Epoch 346/380 (lr=1e-05), train loss 0.00130, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:02 Epoch 347/380 (lr=1e-05), train loss 0.00116, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:04 Epoch 348/380 (lr=1e-05), train loss 0.00131, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:06 Epoch 349/380 (lr=1e-05), train loss 0.00119, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:08 Training for epoch 350 done, starting evaluation
+2026-01-18 10:32:08 Epoch 350/380 (lr=1e-05), train loss 0.00120, valid loss 0.00266, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:08 Model performance:
+2026-01-18 10:32:08   metrics/test.rmse:           3.58
+2026-01-18 10:32:08   metrics/test.rmse_pcutoff:   3.61
+2026-01-18 10:32:08   metrics/test.mAP:           28.37
+2026-01-18 10:32:08   metrics/test.mAR:           36.25
+2026-01-18 10:32:10 Epoch 351/380 (lr=1e-05), train loss 0.00108, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:12 Epoch 352/380 (lr=1e-05), train loss 0.00175, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:14 Epoch 353/380 (lr=1e-05), train loss 0.00117, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:16 Epoch 354/380 (lr=1e-05), train loss 0.00126, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:18 Epoch 355/380 (lr=1e-05), train loss 0.00137, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:20 Epoch 356/380 (lr=1e-05), train loss 0.00127, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:22 Epoch 357/380 (lr=1e-05), train loss 0.00107, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:24 Epoch 358/380 (lr=1e-05), train loss 0.00151, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:26 Epoch 359/380 (lr=1e-05), train loss 0.00125, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:28 Training for epoch 360 done, starting evaluation
+2026-01-18 10:32:29 Epoch 360/380 (lr=1e-05), train loss 0.00129, valid loss 0.00260, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:29 Model performance:
+2026-01-18 10:32:29   metrics/test.rmse:           3.46
+2026-01-18 10:32:29   metrics/test.rmse_pcutoff:   3.52
+2026-01-18 10:32:29   metrics/test.mAP:           32.49
+2026-01-18 10:32:29   metrics/test.mAR:           40.00
+2026-01-18 10:32:30 Epoch 361/380 (lr=1e-05), train loss 0.00125, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:33 Epoch 362/380 (lr=1e-05), train loss 0.00118, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:34 Epoch 363/380 (lr=1e-05), train loss 0.00118, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:36 Epoch 364/380 (lr=1e-05), train loss 0.00109, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:39 Epoch 365/380 (lr=1e-05), train loss 0.00124, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:41 Epoch 366/380 (lr=1e-05), train loss 0.00108, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:43 Epoch 367/380 (lr=1e-05), train loss 0.00153, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:45 Epoch 368/380 (lr=1e-05), train loss 0.00109, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:47 Epoch 369/380 (lr=1e-05), train loss 0.00135, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:49 Training for epoch 370 done, starting evaluation
+2026-01-18 10:32:49 Epoch 370/380 (lr=1e-05), train loss 0.00141, valid loss 0.00267, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:49 Model performance:
+2026-01-18 10:32:49   metrics/test.rmse:           3.95
+2026-01-18 10:32:49   metrics/test.rmse_pcutoff:   3.25
+2026-01-18 10:32:49   metrics/test.mAP:           29.26
+2026-01-18 10:32:49   metrics/test.mAR:           33.75
+2026-01-18 10:32:51 Epoch 371/380 (lr=1e-05), train loss 0.00114, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:53 Epoch 372/380 (lr=1e-05), train loss 0.00131, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:55 Epoch 373/380 (lr=1e-05), train loss 0.00124, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:57 Epoch 374/380 (lr=1e-05), train loss 0.00112, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:32:59 Epoch 375/380 (lr=1e-05), train loss 0.00132, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:33:01 Epoch 376/380 (lr=1e-05), train loss 0.00115, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:33:03 Epoch 377/380 (lr=1e-05), train loss 0.00099, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:33:05 Epoch 378/380 (lr=1e-05), train loss 0.00097, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:33:07 Epoch 379/380 (lr=1e-05), train loss 0.00117, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:33:09 Training for epoch 380 done, starting evaluation
+2026-01-18 10:33:10 Epoch 380/380 (lr=1e-05), train loss 0.00124, valid loss 0.00262, GPU: 5396.0/81079.8 MiB
+2026-01-18 10:33:10 Model performance:
+2026-01-18 10:33:10   metrics/test.rmse:           3.47
+2026-01-18 10:33:10   metrics/test.rmse_pcutoff:   3.50
+2026-01-18 10:33:10   metrics/test.mAP:           32.17
+2026-01-18 10:33:10   metrics/test.mAR:           42.50
