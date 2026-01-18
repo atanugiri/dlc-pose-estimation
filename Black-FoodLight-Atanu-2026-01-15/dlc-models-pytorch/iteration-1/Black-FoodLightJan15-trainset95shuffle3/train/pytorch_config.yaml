@@ -137,7 +137,7 @@ runner:
       - 90
       - 120
   snapshots:
-    max_snapshots: 5
+    max_snapshots: 2
     save_epochs: 25
     save_optimizer_state: false
 train_settings:
