@@ -14,5 +14,5 @@ else:
 mp4_videos = sorted([f for f in data_dir.iterdir() if f.is_file() and f.suffix == ".mp4"])
 first_five = [str(f) for f in mp4_videos[:5]]
 print("First 5 sorted .mp4 videos:")
-for v in first_five:
-    print(f"Found file: {v}")
+for idx, v in enumerate(mp4_videos):
+    print(f"[{idx}] Found file: {v}")
