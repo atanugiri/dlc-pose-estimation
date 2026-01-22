@@ -8,7 +8,7 @@ identity:
 
 # Project path (change when moving around)
 project_path: 
-  /work/agiri/Black-FoodLight-Atanu-2026-01-15
+  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15
 
 
 # Default DeepLabCut engine to use for shuffle creation (either pytorch or tensorflow)
@@ -38,9 +38,9 @@ video_sets:
   /work/agiri/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_Y_Indigo.mp4:
     crop: 0, 340, 0, 336
   /work/agiri/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_Y_Lilac.mp4:
-    crop: 86, 244, 85, 242
+    crop: 0, 340, 0, 336
   /work/agiri/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_10_24_Y_Violet.mp4:
-    crop: 83, 244, 84, 242
+    crop: 0, 340, 0, 336
   /work/agiri/Black-FoodLight-Atanu-2026-01-15/videos/FoodLight_9_12_24_Y_Sky.mp4:
     crop: 0, 340, 0, 336
 bodyparts:
@@ -51,9 +51,18 @@ bodyparts:
 - Tailbase
 
 # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
 start: 0
 stop: 1
-numframes2pick: 10
+numframes2pick: 5
 
 
 # Plotting configuration
@@ -76,7 +85,7 @@ colormap: rainbow
 # Training,Evaluation and Analysis configuration
 TrainingFraction:
 - 0.95
-iteration: 4
+iteration: 6
 default_net_type: resnet_101
 default_augmenter: default
 snapshotindex: -1
