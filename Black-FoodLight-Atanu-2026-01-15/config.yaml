@@ -8,7 +8,7 @@ identity:
 
 # Project path (change when moving around)
 project_path: 
-  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-FoodLight-Atanu-2026-01-15
+  /work/agiri/Black-FoodLight-Atanu-2026-01-15
 
 
 # Default DeepLabCut engine to use for shuffle creation (either pytorch or tensorflow)

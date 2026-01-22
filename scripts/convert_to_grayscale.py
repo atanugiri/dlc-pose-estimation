@@ -8,7 +8,7 @@ def convert_to_grayscale_ffmpeg(input_path, output_path):
         "ffmpeg",
         "-y",  # overwrite output
         "-i", input_path,
-        "-vf", "format=gray,eq=contrast=1.0:brightness=0.3",  # Grayscale with contrast reduction and brightness reduction
+        "-vf", "format=gray,eq=contrast=1.1:brightness=0.1",  # Grayscale with contrast reduction and brightness reduction
         "-c:v", "libx264",  # Re-encode with H.264 for better quality
         "-preset", "medium",  # Balance speed/quality
         "-crf", "20",  # High quality (lower = better, 18-23 range)
