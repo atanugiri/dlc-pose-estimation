@@ -3,7 +3,7 @@ from pathlib import Path
 
 cwd = Path(__file__).parent.resolve()
 print(f"Current working directory: {cwd}")
-data_dir = cwd.parent / "Black-ToyLight-Atanu-2026-01-22" / "videos_colored"
+data_dir = cwd.parent / "Black-ToyLight-Atanu-2026-01-22" / "videos"
 print(f"Data directory: {data_dir}")
 
 if not data_dir.exists():
