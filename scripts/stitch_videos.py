@@ -157,17 +157,17 @@ if __name__ == "__main__":
         help="Use fast mode (-c copy). Only works if all videos have identical codec/resolution/fps"
     )
     parser.add_argument(
-        "--width", "-w",
+        "--width",
         type=int,
         help="Target width for re-encoding (default: use first video's width)"
     )
     parser.add_argument(
-        "--height", "-h",
+        "--height",
         type=int,
         help="Target height for re-encoding (default: use first video's height)"
     )
     parser.add_argument(
-        "--fps", "-f",
+        "--fps",
         type=float,
         help="Target fps for re-encoding (default: use first video's fps)"
     )

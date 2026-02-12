@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import deeplabcut
 import glob
 import subprocess
