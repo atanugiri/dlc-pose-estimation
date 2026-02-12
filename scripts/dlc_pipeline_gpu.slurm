@@ -1,10 +1,9 @@
 #!/bin/bash
-#SBATCH -A DBS25005          # project allocation code for lonestar6
 #SBATCH --job-name=dlc_gpu
 #SBATCH --output=%x-%j.out
 #SBATCH --error=%x-%j.err
-#SBATCH --partition=gpu-a100-dev       # GPU partition
-## SBATCH --gres=gpu:1          # request 1 GPU only for punakha
+#SBATCH --partition=dgx       # GPU partition
+## SBATCH --gres=gpu:1        # request 1 GPU only for punakha
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=6
@@ -13,20 +12,20 @@
 
 # --- Variables ---
 export CONFIG_PATH="$WORK/Black-FoodLight-Atanu-2026-01-15/config.yaml"
-export CONDA_ENV="$SCRATCH/miniconda3/envs/DEEPLABCUT"
+export CONDA_ENV="$HOME/miniconda3/envs/DEEPLABCUT"
 export DEVICE="cuda:0"
 export EPOCHS=200
-export SHUFFLE=2
+export SHUFFLE=3
 export TRAININGSETINDEX=0
-export VIDEOS="$WORK/Black-FoodLight-Atanu-2026-01-15/videos/*.mp4"
-export SNAPSHOT_PATH="$WORK/Black-FoodLight-Atanu-2026-01-15/dlc-models-pytorch/iteration-0/\
-Black-FoodLightJan15-trainset95shuffle1/train/snapshot-best-050.pt"
-export TASK="train"  # Options: train, evaluate, analyze, all
+export VIDEOS="$WORK/Black-ToyLight-Atanu-2026-01-22/videos/*.mp4"
+export SNAPSHOT_PATH="$WORK/Black-FoodLight-Atanu-2026-01-15/dlc-models-pytorch/iteration-8/\
+Black-FoodLightJan15-trainset95shuffle3/train/snapshot-best-1520.pt"
+export TASK="all"  # Options: train, evaluate, analyze, all
 
 echo "Job started on $(hostname) at $(date)"
 
 # Initialize environment
-source $SCRATCH/miniconda3/etc/profile.d/conda.sh
+source $HOME/miniconda3/etc/profile.d/conda.sh
 conda activate "$CONDA_ENV"
 
 # Control thread usage for OpenMP/MKL
@@ -40,7 +39,7 @@ echo "GPU status before task:"
 nvidia-smi --query-gpu=index,memory.used,memory.total,utilization.gpu --format=csv,noheader,nounits
 
 # Change to the project directory to ensure outputs are saved correctly
-cd "$WORK/Black-FoodLight-Atanu-2026-01-15"
+# cd "$WORK/Black-FoodLight-Atanu-2026-01-15"
 
 # Run DeepLabCut pipeline
 python "$WORK/scripts/dlc_pipeline.py"
