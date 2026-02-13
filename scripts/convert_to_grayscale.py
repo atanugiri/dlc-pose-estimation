@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
-import os
-import glob
+from pathlib import Path
 import subprocess
 import argparse
 
@@ -38,12 +37,15 @@ def batch_convert_ffmpeg(input_dir, output_dir, ext="mp4", contrast=1.0, brightn
         contrast: Contrast adjustment (1.0 = no change)
         brightness: Brightness adjustment (0 = no change)
     """
-    os.makedirs(output_dir, exist_ok=True)
-    for file in glob.glob(os.path.join(input_dir, f"*.{ext}")):
-        filename = os.path.basename(file)
-        output_file = os.path.join(output_dir, f"{filename}")
+    input_path = Path(input_dir)
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+    
+    for file in input_path.glob(f"*.{ext}"):
+        filename = file.name
+        output_file = output_path / filename
         print(f"Converting {file} -> {output_file}")
-        convert_to_grayscale_ffmpeg(file, output_file, contrast=contrast, brightness=brightness)
+        convert_to_grayscale_ffmpeg(str(file), str(output_file), contrast=contrast, brightness=brightness)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
