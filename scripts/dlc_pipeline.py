@@ -77,7 +77,7 @@ def do_label(config, videos, shuffle):
         config=config,
         videos=videos,
         shuffle=shuffle,
-        filtered=True,
+        filtered=False,
         pcutoff=0.3
     )
     nvidia_status("after label_video")
@@ -108,7 +108,7 @@ def main():
     try:
         if task == "all":
             do_analyze(config_path, videos, shuffle, trainingsetindex, device)
-            do_filter(config_path, videos, shuffle)
+            # do_filter(config_path, videos, shuffle)
             do_label(config_path, videos, shuffle)
         elif task == "train":
             do_train(config_path, shuffle, trainingsetindex, device, epochs, snapshot_path)

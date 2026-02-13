@@ -3,7 +3,7 @@
 #SBATCH --output=%x-%j.out
 #SBATCH --error=%x-%j.err
 #SBATCH --partition=dgx       # GPU partition
-## SBATCH --gres=gpu:1        # request 1 GPU only for punakha
+#SBATCH --gres=gpu:1          # request 1 GPU only for punakha
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=6
