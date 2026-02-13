@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os
+from pathlib import Path
 import subprocess
 import argparse
 
@@ -15,15 +15,18 @@ def split_video_to_quadrants(input_path, output_dir=None, dry_run=False, overwri
     
     Creates 4 files named: top_left.mp4, top_right.mp4, bottom_left.mp4, bottom_right.mp4
     """
-    if not os.path.exists(input_path):
+    input_file = Path(input_path)
+    if not input_file.exists():
         print(f"Error: Input file not found: {input_path}")
         return
     
     if output_dir is None:
-        output_dir = os.path.dirname(os.path.abspath(input_path))
-    os.makedirs(output_dir, exist_ok=True)
+        output_dir = input_file.resolve().parent
+    else:
+        output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
     
-    ext = os.path.splitext(input_path)[1] or '.mp4'
+    ext = input_file.suffix or '.mp4'
     
     # Define quadrants with their crop filters
     quadrants = {
@@ -35,19 +38,19 @@ def split_video_to_quadrants(input_path, output_dir=None, dry_run=False, overwri
     
     for name, crop_filter in quadrants.items():
         output_filename = f"{name}{ext}"
-        output_path = os.path.join(output_dir, output_filename)
+        output_path = output_dir / output_filename
         
-        if os.path.exists(output_path) and not overwrite:
+        if output_path.exists() and not overwrite:
             print(f"Skipping (file exists): {output_path}")
             continue
         
         cmd = [
             'ffmpeg',
             '-y',  # overwrite output files
-            '-i', input_path,
+            '-i', str(input_path),
             '-filter:v', crop_filter,
             '-c:a', 'copy',  # copy audio stream
-            output_path
+            str(output_path)
         ]
         
         print(f"Creating {name}: {output_path}")
