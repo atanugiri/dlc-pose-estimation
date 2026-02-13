@@ -23,7 +23,6 @@ Quadrant mapping:
     - bottom_right: Animal4
 """
 
-import os
 import re
 import argparse
 import subprocess
