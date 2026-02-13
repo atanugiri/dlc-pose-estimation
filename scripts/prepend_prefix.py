@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os
+from pathlib import Path
 import argparse
 
 DEFAULT_EXTS = ['.mp4', '.avi', '.mov', '.mkv']
@@ -7,33 +7,33 @@ PREFIX = 'ChocolateMilk_'
 
 
 def prepend_prefix_to_file(path, prefix=PREFIX, dry_run=False):
-    dirn = os.path.dirname(path)
-    name = os.path.basename(path)
+    file_path = Path(path)
+    dirn = file_path.parent
+    name = file_path.name
     if name.startswith(prefix):
         print(f"Skipping (already prefixed): {path}")
         return
     new_name = prefix + name
-    new_path = os.path.join(dirn, new_name)
-    if os.path.exists(new_path):
+    new_path = dirn / new_name
+    if new_path.exists():
         print(f"Target exists, skipping: {new_path}")
         return
     print(f"Rename: '{path}' -> '{new_path}'")
     if not dry_run:
-        os.rename(path, new_path)
+        file_path.rename(new_path)
 
 
 def walk_and_prepend(folder, exts=None, prefix=PREFIX, dry_run=False):
     if exts is None:
         exts = DEFAULT_EXTS
     exts = [e.lower() for e in exts]
-    for root, dirs, files in os.walk(folder):
-        for f in files:
-            if os.path.splitext(f)[1].lower() in exts:
-                full = os.path.join(root, f)
-                try:
-                    prepend_prefix_to_file(full, prefix=prefix, dry_run=dry_run)
-                except Exception as e:
-                    print(f"Failed: {full} -> {e}")
+    folder_path = Path(folder)
+    for file_path in folder_path.rglob('*'):
+        if file_path.is_file() and file_path.suffix.lower() in exts:
+            try:
+                prepend_prefix_to_file(file_path, prefix=prefix, dry_run=dry_run)
+            except Exception as e:
+                print(f"Failed: {file_path} -> {e}")
 
 
 if __name__ == '__main__':
