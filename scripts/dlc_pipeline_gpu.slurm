@@ -11,16 +11,17 @@
 #SBATCH --mem=16G
 
 # --- Variables ---
-export CONFIG_PATH="$WORK/Black-FoodLight-Atanu-2026-01-15/config.yaml"
+export CONFIG_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/config.yaml"
 export CONDA_ENV="$HOME/miniconda3/envs/DEEPLABCUT"
 export DEVICE="cuda:0"
 export EPOCHS=200
 export SHUFFLE=3
 export TRAININGSETINDEX=0
-export VIDEOS="$WORK/Black-ToyLight-Atanu-2026-01-22/videos/*.mp4"
-export SNAPSHOT_PATH="$WORK/Black-FoodLight-Atanu-2026-01-15/dlc-models-pytorch/iteration-8/\
-Black-FoodLightJan15-trainset95shuffle3/train/snapshot-best-1520.pt"
-export TASK="all"  # Options: train, evaluate, analyze, all
+# export VIDEOS="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/*.mp4"
+export VIDEOS="$WORK/Black-ChocolateMilk/stitched_video.mp4"
+export SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-4/\
+DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-590.pt"
+export TASK="train"  # Options: train, evaluate, analyze, all
 
 echo "Job started on $(hostname) at $(date)"
 

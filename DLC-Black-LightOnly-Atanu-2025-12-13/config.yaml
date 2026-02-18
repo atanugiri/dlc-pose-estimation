@@ -8,7 +8,7 @@ identity:
 
 # Project path (change when moving around)
 project_path: 
-  /work/agiri/DLC-Black-LightOnly-Atanu-2025-12-13
+  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13
 
 
 # Default DeepLabCut engine to use for shuffle creation (either pytorch or tensorflow)
@@ -53,6 +53,8 @@ video_sets:
     crop: 0, 640, 0, 480
   /work/agiri/DLC-Black-LightOnly-Atanu-2025-12-13/videos/FoodOnly_8_28_24_S3P_Teal_Trial2.mp4:
     crop: 0, 640, 0, 480
+  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-ChocolateMilk/stitched_video.mp4:
+    crop: 0, 640, 0, 480
 bodyparts:
 - Head
 - Neck
@@ -68,9 +70,18 @@ bodyparts:
 
 
 # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
 start: 0
 stop: 1
-numframes2pick: 5
+numframes2pick: 100
 
 
 # Plotting configuration
@@ -94,7 +105,7 @@ colormap: rainbow
 # Training,Evaluation and Analysis configuration
 TrainingFraction:
 - 0.95
-iteration: 4
+iteration: 5
 default_net_type: resnet_101
 default_augmenter: default
 snapshotindex: -1

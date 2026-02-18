@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 import deeplabcut
-import glob
 import subprocess
 import time
 import sys
 import os
+from pathlib import Path
 
 def nvidia_status(label):
     print(f"=== NVIDIA SMI: {label} ===")
@@ -94,32 +94,37 @@ def main():
     epochs = int(os.environ.get("EPOCHS", 200))
     snapshot_path = os.environ.get("SNAPSHOT_PATH", "")
     
-    videos = sorted(glob.glob(videos_pattern))
+    # Expand video pattern using pathlib for modern path handling
+    videos = sorted([str(p) for p in Path().glob(videos_pattern)])
     if not videos:
         print(f"No videos found at: {videos_pattern}")
         sys.exit(1)
 
     # For testing: limit to first 2 videos (comment out for full run)
-    selected_indices = list(range(5))  # Example indices
-    videos = [videos[i] for i in selected_indices]
+    # selected_indices = list(range(5))  # Example indices
+    # videos = [videos[i] for i in selected_indices]
     
     print(f"Found {len(videos)} videos")
     
     try:
+        # convert config and snapshot paths to strings when present
+        config_arg = str(Path(config_path)) if config_path else ""
+        snapshot_arg = str(Path(snapshot_path)) if snapshot_path else ""
+
         if task == "all":
-            do_analyze(config_path, videos, shuffle, trainingsetindex, device)
+            do_analyze(config_arg, videos, shuffle, trainingsetindex, device)
             # do_filter(config_path, videos, shuffle)
-            do_label(config_path, videos, shuffle)
+            do_label(config_arg, videos, shuffle)
         elif task == "train":
-            do_train(config_path, shuffle, trainingsetindex, device, epochs, snapshot_path)
+            do_train(config_arg, shuffle, trainingsetindex, device, epochs, snapshot_arg)
         elif task == "evaluate":
-            do_evaluate(config_path, [1, 2, 3], trainingsetindex, device)
+            do_evaluate(config_arg, [1, 2, 3], trainingsetindex, device)
         elif task == "analyze":
-            do_analyze(config_path, videos, shuffle, trainingsetindex, device)
+            do_analyze(config_arg, videos, shuffle, trainingsetindex, device)
         elif task == "filter":
-            do_filter(config_path, videos, shuffle)
+            do_filter(config_arg, videos, shuffle)
         elif task == "label_video":
-            do_label(config_path, videos, shuffle)
+            do_label(config_arg, videos, shuffle)
         else:
             print("Invalid TASK. Set TASK to: train, evaluate, analyze, filter, label_video, or all")
             sys.exit(1)
