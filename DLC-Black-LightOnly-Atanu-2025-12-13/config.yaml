@@ -8,7 +8,7 @@ identity:
 
 # Project path (change when moving around)
 project_path: 
-  /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13
+  /work/agiri/DLC-Black-LightOnly-Atanu-2025-12-13
 
 
 # Default DeepLabCut engine to use for shuffle creation (either pytorch or tensorflow)
@@ -53,7 +53,7 @@ video_sets:
     crop: 0, 640, 0, 480
   /work/agiri/DLC-Black-LightOnly-Atanu-2025-12-13/videos/FoodOnly_8_28_24_S3P_Teal_Trial2.mp4:
     crop: 0, 640, 0, 480
-  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-ChocolateMilk/stitched_video.mp4:
+  /work/agiri/Black-ChocolateMilk/stitched_video.mp4:
     crop: 0, 640, 0, 480
 bodyparts:
 - Head

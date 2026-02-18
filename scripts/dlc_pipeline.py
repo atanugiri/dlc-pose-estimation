@@ -4,6 +4,7 @@ import subprocess
 import time
 import sys
 import os
+import glob
 from pathlib import Path
 
 def nvidia_status(label):
@@ -94,8 +95,12 @@ def main():
     epochs = int(os.environ.get("EPOCHS", 200))
     snapshot_path = os.environ.get("SNAPSHOT_PATH", "")
     
-    # Expand video pattern using pathlib for modern path handling
-    videos = sorted([str(p) for p in Path().glob(videos_pattern)])
+    # Expand video pattern using glob (supports absolute and relative patterns)
+    if not videos_pattern:
+        print("No VIDEOS pattern provided in environment variable VIDEOS")
+        sys.exit(1)
+    matches = glob.glob(videos_pattern)
+    videos = sorted([str(Path(p)) for p in matches])
     if not videos:
         print(f"No videos found at: {videos_pattern}")
         sys.exit(1)
