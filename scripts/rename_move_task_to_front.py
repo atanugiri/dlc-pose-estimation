@@ -12,7 +12,7 @@ Example:
   10_02_23_S1_P2L1P_ToyRAT_None1_Joey_Bob_Teddy_Trial0.mp4
   -> ToyRAT_10_02_23_S1_P2L1P_None1_Joey_Bob_Teddy_Trial0.mp4
 
-This script operates on a single file or all .mp4 files in a directory.
+This script operates on a single file or all .mp4 files in a directory (recursively).
 Default behaviour is a dry-run; use `--commit` to perform renames.
 
 Options:
@@ -52,8 +52,16 @@ def rename_file(path: Path, dry_run: bool) -> bool:
         print(f"SKIP (pattern mismatch): {path.name}")
         return False
 
+    # Build a normalized prefix: prefer structured date/session/treatment when available
+    gd = m.groupdict()
+    if gd.get('date'):
+        # collapse underscore between session and treatment: S1_P2 -> S1P2
+        norm_prefix = f"{gd['date']}_{gd['session']}{gd['treatment']}"
+    else:
+        norm_prefix = gd.get('prefix') or ''
+
     new_name = (
-        f"{m.group('task')}_{m.group('prefix')}_{m.group('a1')}_"
+        f"{m.group('task')}_{norm_prefix}_{m.group('a1')}_"
         f"{m.group('a2')}_{m.group('a3')}_{m.group('a4')}_{m.group('trial')}.{m.group('ext')}"
     )
     target = path.with_name(new_name)
@@ -79,11 +87,12 @@ def rename_file(path: Path, dry_run: bool) -> bool:
 def gather_files(path: Path):
     """Return a list of Path objects to process from the given path.
 
-    If `path` is a directory, all `*.mp4` files inside it are returned (non-recursive).
+    If `path` is a directory, all `*.mp4` files inside it and its subdirectories
+    are returned (recursive).
     If `path` is a file, a single-item list with that file is returned.
     """
     if path.is_dir():
-        return sorted(path.glob("*.mp4"))
+        return sorted(path.rglob("*.mp4"))
     return [path]
 
 
