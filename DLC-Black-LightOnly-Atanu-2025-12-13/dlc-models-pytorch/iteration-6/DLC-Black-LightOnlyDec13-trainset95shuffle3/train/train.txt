@@ -1,0 +1,127 @@
+2026-02-25 08:20:07 Training with configuration:
+2026-02-25 08:20:07 data:
+2026-02-25 08:20:07   bbox_margin: 20
+2026-02-25 08:20:07   colormode: RGB
+2026-02-25 08:20:07   inference:
+2026-02-25 08:20:07     normalize_images: True
+2026-02-25 08:20:07   train:
+2026-02-25 08:20:07     affine:
+2026-02-25 08:20:07       p: 0.5
+2026-02-25 08:20:07       rotation: 30
+2026-02-25 08:20:07       scaling: [0.5, 1.25]
+2026-02-25 08:20:07       translation: 0
+2026-02-25 08:20:07     crop_sampling:
+2026-02-25 08:20:07       width: 448
+2026-02-25 08:20:07       height: 448
+2026-02-25 08:20:07       max_shift: 0.1
+2026-02-25 08:20:07       method: hybrid
+2026-02-25 08:20:07     gaussian_noise: 12.75
+2026-02-25 08:20:07     motion_blur: True
+2026-02-25 08:20:07     normalize_images: True
+2026-02-25 08:20:07 device: auto
+2026-02-25 08:20:07 inference:
+2026-02-25 08:20:07   multithreading:
+2026-02-25 08:20:07     enabled: True
+2026-02-25 08:20:07     queue_length: 4
+2026-02-25 08:20:07     timeout: 30.0
+2026-02-25 08:20:07   compile:
+2026-02-25 08:20:07     enabled: False
+2026-02-25 08:20:07     backend: inductor
+2026-02-25 08:20:07   autocast:
+2026-02-25 08:20:07     enabled: False
+2026-02-25 08:20:07 metadata:
+2026-02-25 08:20:07   project_path: /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13
+2026-02-25 08:20:07   pose_config_path: /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-6/DLC-Black-LightOnlyDec13-trainset95shuffle3/train/pytorch_config.yaml
+2026-02-25 08:20:07   bodyparts: ['Head', 'Neck', 'Midback', 'Lowerback', 'Tailbase']
+2026-02-25 08:20:07   unique_bodyparts: []
+2026-02-25 08:20:07   individuals: ['animal']
+2026-02-25 08:20:07   with_identity: None
+2026-02-25 08:20:07 method: bu
+2026-02-25 08:20:07 model:
+2026-02-25 08:20:07   backbone:
+2026-02-25 08:20:07     type: ResNet
+2026-02-25 08:20:07     model_name: resnet101
+2026-02-25 08:20:07     output_stride: 16
+2026-02-25 08:20:07     freeze_bn_stats: False
+2026-02-25 08:20:07     freeze_bn_weights: False
+2026-02-25 08:20:07   backbone_output_channels: 2048
+2026-02-25 08:20:07   heads:
+2026-02-25 08:20:07     bodypart:
+2026-02-25 08:20:07       type: HeatmapHead
+2026-02-25 08:20:07       weight_init: normal
+2026-02-25 08:20:07       predictor:
+2026-02-25 08:20:07         type: HeatmapPredictor
+2026-02-25 08:20:07         apply_sigmoid: False
+2026-02-25 08:20:07         clip_scores: True
+2026-02-25 08:20:07         location_refinement: True
+2026-02-25 08:20:07         locref_std: 7.2801
+2026-02-25 08:20:07       target_generator:
+2026-02-25 08:20:07         type: HeatmapGaussianGenerator
+2026-02-25 08:20:07         num_heatmaps: 5
+2026-02-25 08:20:07         pos_dist_thresh: 17
+2026-02-25 08:20:07         heatmap_mode: KEYPOINT
+2026-02-25 08:20:07         gradient_masking: False
+2026-02-25 08:20:07         generate_locref: True
+2026-02-25 08:20:07         locref_std: 7.2801
+2026-02-25 08:20:07       criterion:
+2026-02-25 08:20:07         heatmap:
+2026-02-25 08:20:07           type: WeightedMSECriterion
+2026-02-25 08:20:07           weight: 1.0
+2026-02-25 08:20:07         locref:
+2026-02-25 08:20:07           type: WeightedHuberCriterion
+2026-02-25 08:20:07           weight: 0.05
+2026-02-25 08:20:07       heatmap_config:
+2026-02-25 08:20:07         channels: [2048, 5]
+2026-02-25 08:20:07         kernel_size: [3]
+2026-02-25 08:20:07         strides: [2]
+2026-02-25 08:20:07       locref_config:
+2026-02-25 08:20:07         channels: [2048, 10]
+2026-02-25 08:20:07         kernel_size: [3]
+2026-02-25 08:20:07         strides: [2]
+2026-02-25 08:20:07 net_type: resnet_101
+2026-02-25 08:20:07 runner:
+2026-02-25 08:20:07   type: PoseTrainingRunner
+2026-02-25 08:20:07   gpus: None
+2026-02-25 08:20:07   key_metric: test.mAP
+2026-02-25 08:20:07   key_metric_asc: True
+2026-02-25 08:20:07   eval_interval: 10
+2026-02-25 08:20:07   optimizer:
+2026-02-25 08:20:07     type: AdamW
+2026-02-25 08:20:07     params:
+2026-02-25 08:20:07       lr: 0.0005
+2026-02-25 08:20:07   scheduler:
+2026-02-25 08:20:07     type: LRListScheduler
+2026-02-25 08:20:07     params:
+2026-02-25 08:20:07       lr_list: [[0.0001], [1e-05]]
+2026-02-25 08:20:07       milestones: [90, 120]
+2026-02-25 08:20:07   snapshots:
+2026-02-25 08:20:07     max_snapshots: 5
+2026-02-25 08:20:07     save_epochs: 5
+2026-02-25 08:20:07     save_optimizer_state: False
+2026-02-25 08:20:07 train_settings:
+2026-02-25 08:20:07   batch_size: 8
+2026-02-25 08:20:07   dataloader_workers: 0
+2026-02-25 08:20:07   dataloader_pin_memory: False
+2026-02-25 08:20:07   display_iters: 100
+2026-02-25 08:20:07   epochs: 200
+2026-02-25 08:20:07   seed: 42
+2026-02-25 08:20:08 Data Transforms:
+2026-02-25 08:20:08   Training:   Compose([
+  Affine(always_apply=False, p=0.5, interpolation=1, mask_interpolation=0, cval=0, mode=0, scale={'x': (0.5, 1.25), 'y': (0.5, 1.25)}, translate_percent=None, translate_px={'x': (0, 0), 'y': (0, 0)}, rotate=(-30, 30), fit_output=False, shear={'x': (0.0, 0.0), 'y': (0.0, 0.0)}, cval_mask=0, keep_ratio=True, rotate_method='largest_box'),
+  PadIfNeeded(always_apply=True, p=1.0, min_height=448, min_width=448, pad_height_divisor=None, pad_width_divisor=None, position=PositionType.CENTER, border_mode=0, value=None, mask_value=None),
+  KeypointAwareCrop(always_apply=True, p=1.0, width=448, height=448, max_shift=0.1, crop_sampling='hybrid'),
+  MotionBlur(always_apply=False, p=0.5, blur_limit=(3, 7), allow_shifted=True),
+  GaussNoise(always_apply=False, p=0.5, var_limit=(0, 162.5625), per_channel=True, mean=0),
+  Normalize(always_apply=False, p=1.0, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], max_pixel_value=255.0),
+], p=1.0, bbox_params={'format': 'coco', 'label_fields': ['bbox_labels'], 'min_area': 0.0, 'min_visibility': 0.0, 'min_width': 0.0, 'min_height': 0.0, 'check_each_transform': True}, keypoint_params={'format': 'xy', 'label_fields': ['class_labels'], 'remove_invisible': False, 'angle_in_degrees': True, 'check_each_transform': True}, additional_targets={}, is_check_shapes=True)
+2026-02-25 08:20:08   Validation: Compose([
+  Normalize(always_apply=False, p=1.0, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], max_pixel_value=255.0),
+], p=1.0, bbox_params={'format': 'coco', 'label_fields': ['bbox_labels'], 'min_area': 0.0, 'min_visibility': 0.0, 'min_width': 0.0, 'min_height': 0.0, 'check_each_transform': True}, keypoint_params={'format': 'xy', 'label_fields': ['class_labels'], 'remove_invisible': False, 'angle_in_degrees': True, 'check_each_transform': True}, additional_targets={}, is_check_shapes=True)
+2026-02-25 08:20:10 Using 474 images and 25 for testing
+2026-02-25 08:20:10 
+Starting pose model training...
+--------------------------------------------------
+2026-02-25 08:20:20 Epoch 1111/1310 (lr=1e-05), train loss 0.00110, GPU: 5396.0/81079.8 MiB
+2026-02-25 08:20:28 Epoch 1112/1310 (lr=1e-05), train loss 0.00110, GPU: 5396.0/81079.8 MiB
+2026-02-25 08:20:37 Epoch 1113/1310 (lr=1e-05), train loss 0.00106, GPU: 5396.0/81079.8 MiB
+2026-02-25 08:20:45 Epoch 1114/1310 (lr=1e-05), train loss 0.00108, GPU: 5396.0/81079.8 MiB
