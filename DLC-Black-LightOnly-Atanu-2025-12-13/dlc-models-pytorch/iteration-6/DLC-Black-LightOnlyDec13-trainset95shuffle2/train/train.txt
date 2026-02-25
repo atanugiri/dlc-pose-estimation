@@ -1,0 +1,107 @@
+2026-02-24 23:56:03 Training with configuration:
+2026-02-24 23:56:03 data:
+2026-02-24 23:56:03   bbox_margin: 20
+2026-02-24 23:56:03   colormode: RGB
+2026-02-24 23:56:03   inference:
+2026-02-24 23:56:03     normalize_images: True
+2026-02-24 23:56:03   train:
+2026-02-24 23:56:03     affine:
+2026-02-24 23:56:03       p: 0.5
+2026-02-24 23:56:03       rotation: 30
+2026-02-24 23:56:03       scaling: [0.5, 1.25]
+2026-02-24 23:56:03       translation: 0
+2026-02-24 23:56:03     crop_sampling:
+2026-02-24 23:56:03       width: 448
+2026-02-24 23:56:03       height: 448
+2026-02-24 23:56:03       max_shift: 0.1
+2026-02-24 23:56:03       method: hybrid
+2026-02-24 23:56:03     gaussian_noise: 12.75
+2026-02-24 23:56:03     motion_blur: True
+2026-02-24 23:56:03     normalize_images: True
+2026-02-24 23:56:03 device: auto
+2026-02-24 23:56:03 inference:
+2026-02-24 23:56:03   multithreading:
+2026-02-24 23:56:03     enabled: True
+2026-02-24 23:56:03     queue_length: 4
+2026-02-24 23:56:03     timeout: 30.0
+2026-02-24 23:56:03   compile:
+2026-02-24 23:56:03     enabled: False
+2026-02-24 23:56:03     backend: inductor
+2026-02-24 23:56:03   autocast:
+2026-02-24 23:56:03     enabled: False
+2026-02-24 23:56:03 metadata:
+2026-02-24 23:56:03   project_path: /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13
+2026-02-24 23:56:03   pose_config_path: /Users/atanugiri/Downloads/dlc-pose-estimation/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-6/DLC-Black-LightOnlyDec13-trainset95shuffle2/train/pytorch_config.yaml
+2026-02-24 23:56:03   bodyparts: ['Head', 'Neck', 'Midback', 'Lowerback', 'Tailbase']
+2026-02-24 23:56:03   unique_bodyparts: []
+2026-02-24 23:56:03   individuals: ['animal']
+2026-02-24 23:56:03   with_identity: None
+2026-02-24 23:56:03 method: bu
+2026-02-24 23:56:03 model:
+2026-02-24 23:56:03   backbone:
+2026-02-24 23:56:03     type: ResNet
+2026-02-24 23:56:03     model_name: resnet101
+2026-02-24 23:56:03     output_stride: 16
+2026-02-24 23:56:03     freeze_bn_stats: False
+2026-02-24 23:56:03     freeze_bn_weights: False
+2026-02-24 23:56:03   backbone_output_channels: 2048
+2026-02-24 23:56:03   heads:
+2026-02-24 23:56:03     bodypart:
+2026-02-24 23:56:03       type: HeatmapHead
+2026-02-24 23:56:03       weight_init: normal
+2026-02-24 23:56:03       predictor:
+2026-02-24 23:56:03         type: HeatmapPredictor
+2026-02-24 23:56:03         apply_sigmoid: False
+2026-02-24 23:56:03         clip_scores: True
+2026-02-24 23:56:03         location_refinement: True
+2026-02-24 23:56:03         locref_std: 7.2801
+2026-02-24 23:56:03       target_generator:
+2026-02-24 23:56:03         type: HeatmapGaussianGenerator
+2026-02-24 23:56:03         num_heatmaps: 5
+2026-02-24 23:56:03         pos_dist_thresh: 17
+2026-02-24 23:56:03         heatmap_mode: KEYPOINT
+2026-02-24 23:56:03         gradient_masking: False
+2026-02-24 23:56:03         generate_locref: True
+2026-02-24 23:56:03         locref_std: 7.2801
+2026-02-24 23:56:03       criterion:
+2026-02-24 23:56:03         heatmap:
+2026-02-24 23:56:03           type: WeightedMSECriterion
+2026-02-24 23:56:03           weight: 1.0
+2026-02-24 23:56:03         locref:
+2026-02-24 23:56:03           type: WeightedHuberCriterion
+2026-02-24 23:56:03           weight: 0.05
+2026-02-24 23:56:03       heatmap_config:
+2026-02-24 23:56:03         channels: [2048, 5]
+2026-02-24 23:56:03         kernel_size: [3]
+2026-02-24 23:56:03         strides: [2]
+2026-02-24 23:56:03       locref_config:
+2026-02-24 23:56:03         channels: [2048, 10]
+2026-02-24 23:56:03         kernel_size: [3]
+2026-02-24 23:56:03         strides: [2]
+2026-02-24 23:56:03 net_type: resnet_101
+2026-02-24 23:56:03 runner:
+2026-02-24 23:56:03   type: PoseTrainingRunner
+2026-02-24 23:56:03   gpus: None
+2026-02-24 23:56:03   key_metric: test.mAP
+2026-02-24 23:56:03   key_metric_asc: True
+2026-02-24 23:56:03   eval_interval: 10
+2026-02-24 23:56:03   optimizer:
+2026-02-24 23:56:03     type: AdamW
+2026-02-24 23:56:03     params:
+2026-02-24 23:56:03       lr: 0.0005
+2026-02-24 23:56:03   scheduler:
+2026-02-24 23:56:03     type: LRListScheduler
+2026-02-24 23:56:03     params:
+2026-02-24 23:56:03       lr_list: [[0.0001], [1e-05]]
+2026-02-24 23:56:03       milestones: [90, 120]
+2026-02-24 23:56:03   snapshots:
+2026-02-24 23:56:03     max_snapshots: 5
+2026-02-24 23:56:03     save_epochs: 5
+2026-02-24 23:56:03     save_optimizer_state: False
+2026-02-24 23:56:03 train_settings:
+2026-02-24 23:56:03   batch_size: 8
+2026-02-24 23:56:03   dataloader_workers: 0
+2026-02-24 23:56:03   dataloader_pin_memory: False
+2026-02-24 23:56:03   display_iters: 100
+2026-02-24 23:56:03   epochs: 200
+2026-02-24 23:56:03   seed: 42
