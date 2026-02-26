@@ -51,7 +51,7 @@ video_sets:
     crop: 0, 340, 0, 336
   /work/agiri/Black-ToyLight-Atanu-2026-01-22/videos/ToyLight_10_16_23_P_OffWhite.mp4:
     crop: 0, 340, 0, 336
-  /work/agiri/Black-ToyLight-Atanu-2026-01-22/videos/ToyLight_10_16_23_P_ShatteredBackboard.mp4: 
+  /work/agiri/Black-ToyLight-Atanu-2026-01-22/videos/ToyLight_10_16_23_P_ShatteredBackboard.mp4:
     crop: 0, 340, 0, 336
   /work/agiri/Black-ToyLight-Atanu-2026-01-22/videos/ToyLight_10_16_23_P_TrophyRoom.mp4:
     crop: 0, 340, 0, 336
@@ -69,6 +69,8 @@ video_sets:
     crop: 0, 340, 0, 336
   /work/agiri/Black-ToyLight-Atanu-2026-01-22/videos/ToyLight_11_03_23_P_Yeti.mp4:
     crop: 0, 340, 0, 336
+  /work/agiri/Black-ToyLight/stitched_video.mp4:
+    crop: 0, 340, 0, 336
 bodyparts:
 - Head
 - Neck
@@ -78,9 +80,18 @@ bodyparts:
 
 
 # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
 start: 0
 stop: 1
-numframes2pick: 10
+numframes2pick: 300
 
 
 # Plotting configuration
@@ -103,7 +114,7 @@ colormap: rainbow
 # Training,Evaluation and Analysis configuration
 TrainingFraction:
 - 0.95
-iteration: 8
+iteration: 9
 default_net_type: resnet_101
 default_augmenter: default
 snapshotindex: -1
