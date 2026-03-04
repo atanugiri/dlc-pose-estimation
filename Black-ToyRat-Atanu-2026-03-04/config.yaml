@@ -17,34 +17,37 @@ engine: pytorch
 
 # Annotation data set configuration (and individual video cropping parameters)
 video_sets:
-  ? /Users/atanugiri/Downloads/dlc-pose-estimation/Black-ToyRat-Atanu-2026-03-04/videos/ToyRAT_10_02_23_S1P2L1P_Teddy_Trial0.mp4
-  : crop: 0, 640, 0, 480
+  /Users/atanugiri/Downloads/dlc-pose-estimation/Black-ToyRat-Atanu-2026-03-04/stitched_video.mp4:
+    crop: 86, 558, 5, 474
 individuals:
-- individual1
-- individual2
-- individual3
-uniquebodyparts: []
+- m1
+uniquebodyparts:
+- ToyCenter
 multianimalbodyparts:
-- bodypart1
-- bodypart2
-- bodypart3
+- Head
+- Neck
+- Midback
+- Lowerback
+- Tailbase
 bodyparts: MULTI!
 
 
 # Fraction of video to start/stop when extracting frames for labeling/refinement
 start: 0
 stop: 1
-numframes2pick: 20
+numframes2pick: 100
 
 
 # Plotting configuration
 skeleton:
-- - bodypart1
-  - bodypart2
-- - bodypart2
-  - bodypart3
-- - bodypart1
-  - bodypart3
+- - Head
+  - Neck
+- - Neck
+  - Midback
+- - Midback
+  - Lowerback
+- - Lowerback
+  - Tailbase
 skeleton_color: black
 pcutoff: 0.6
 dotsize: 12
