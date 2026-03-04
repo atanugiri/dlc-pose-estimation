@@ -82,4 +82,6 @@ htmlcov/
 # Sphinx build
 _build/
 
-# If you want to track any of the above, remove the corresponding line(s).
+# Caches and backup files
+.cache/
+*~
