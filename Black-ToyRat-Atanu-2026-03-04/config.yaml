@@ -7,8 +7,7 @@ identity: false
 
 
 # Project path (change when moving around)
-project_path: 
-  /work/agiri/Black-ToyRat-Atanu-2026-03-04
+project_path: /work/agiri/Black-ToyRat-Atanu-2026-03-04
 
 
 # Default DeepLabCut engine to use for shuffle creation (either pytorch or tensorflow)
@@ -18,7 +17,7 @@ engine: pytorch
 # Annotation data set configuration (and individual video cropping parameters)
 video_sets:
   /work/agiri/Black-ToyRat-Atanu-2026-03-04/stitched_video.mp4:
-    crop: 86, 558, 5, 474
+    crop: 0, 640, 0, 480
 individuals:
 - m1
 uniquebodyparts:
@@ -35,7 +34,7 @@ bodyparts: MULTI!
 # Fraction of video to start/stop when extracting frames for labeling/refinement
 start: 0
 stop: 1
-numframes2pick: 100
+numframes2pick: 200
 
 
 # Plotting configuration
@@ -58,7 +57,7 @@ colormap: rainbow
 # Training,Evaluation and Analysis configuration
 TrainingFraction:
 - 0.95
-iteration: 0
+iteration: 1
 default_net_type: resnet_50
 default_augmenter: albumentations
 default_track_method: ellipse
