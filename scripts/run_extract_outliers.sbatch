@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=dlc_outliers
-#SBATCH --output=dlc_outliers.%j.out
-#SBATCH --error=dlc_outliers.%j.err
+#SBATCH --output=%x-%j.out
+#SBATCH --error=%x-%j.err
 #SBATCH --partition=dgx         # CPU partition (no GPU cost)
 #SBATCH --time=02:00:00
 #SBATCH --cpus-per-task=24
@@ -19,11 +19,7 @@ echo "Config: $CONFIG_PATH"
 echo "Video: $VIDEO"
 
 # Activate conda
-if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
-	source "$HOME/miniconda3/etc/profile.d/conda.sh"
-elif [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
-	source "$HOME/anaconda3/etc/profile.d/conda.sh"
-fi
+source "$HOME/miniconda3/etc/profile.d/conda.sh"
 conda activate "$CONDA_ENV"
 
 echo "Starting DeepLabCut extract_outlier_frames..."
