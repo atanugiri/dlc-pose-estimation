@@ -22,6 +22,7 @@ def convert_to_grayscale_ffmpeg(input_path, output_path, contrast=1.0, brightnes
         "-c:v", "libx264",  # Re-encode with H.264 for better quality
         "-preset", "medium",  # Balance speed/quality
         "-crf", "20",  # High quality (lower = better, 18-23 range)
+        "-pix_fmt", "yuv420p",  # Ensure compatibility with most players
         output_path
     ]
     subprocess.run(cmd, check=True)
@@ -42,7 +43,7 @@ def batch_convert_ffmpeg(input_dir, output_dir, ext="mp4", contrast=1.0, brightn
     output_path.mkdir(parents=True, exist_ok=True)
     
     for file in input_path.glob(f"*.{ext}"):
-        filename = file.name
+        filename = file.stem + ".mp4"
         output_file = output_path / filename
         print(f"Converting {file} -> {output_file}")
         convert_to_grayscale_ffmpeg(str(file), str(output_file), contrast=contrast, brightness=brightness)

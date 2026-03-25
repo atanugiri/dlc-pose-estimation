@@ -21,7 +21,7 @@ echo "Video: $VIDEO"
 # Activate conda
 source "$HOME/miniconda3/etc/profile.d/conda.sh"
 conda activate "$CONDA_ENV"
-
+ 
 echo "Starting DeepLabCut extract_outlier_frames..."
 python - <<PY
 import builtins
