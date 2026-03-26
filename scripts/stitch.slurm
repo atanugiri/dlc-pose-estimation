@@ -12,9 +12,10 @@ set -euo pipefail
 source "$HOME/miniconda3/etc/profile.d/conda.sh"
 conda activate DEEPLABCUT
 
-# python scripts/stitch_videos.py Competition-task/stitched_videos/ \
-#     -o Competition-task/
+python scripts/stitch_videos.py \
+    Elevated-maze/videos/ \
+    -o Elevated-maze/
 
-python scripts/convert_to_grayscale.py --input-dir Elevated-maze/ \
-    --ext avi \
-    --output-dir Elevated-maze/videos/
+# python scripts/convert_to_grayscale.py --input-dir Elevated-maze/ \
+#     --ext avi \
+#     --output-dir Elevated-maze/videos/
