@@ -1,0 +1,153 @@
+2026-03-26 18:15:02 Training with configuration:
+2026-03-26 18:15:02 data:
+2026-03-26 18:15:02   bbox_margin: 20
+2026-03-26 18:15:02   colormode: RGB
+2026-03-26 18:15:02   inference:
+2026-03-26 18:15:02     normalize_images: True
+2026-03-26 18:15:02   train:
+2026-03-26 18:15:02     affine:
+2026-03-26 18:15:02       p: 0.5
+2026-03-26 18:15:02       rotation: 30
+2026-03-26 18:15:02       scaling: [0.5, 1.25]
+2026-03-26 18:15:02       translation: 0
+2026-03-26 18:15:02     crop_sampling:
+2026-03-26 18:15:02       width: 448
+2026-03-26 18:15:02       height: 448
+2026-03-26 18:15:02       max_shift: 0.1
+2026-03-26 18:15:02       method: hybrid
+2026-03-26 18:15:02     gaussian_noise: 12.75
+2026-03-26 18:15:02     motion_blur: True
+2026-03-26 18:15:02     normalize_images: True
+2026-03-26 18:15:02 device: auto
+2026-03-26 18:15:02 metadata:
+2026-03-26 18:15:02   project_path: /Users/atanugiri/Downloads/dlc-pose-estimation/ElevatedMaze-Atanu-2026-03-25
+2026-03-26 18:15:02   pose_config_path: /Users/atanugiri/Downloads/dlc-pose-estimation/ElevatedMaze-Atanu-2026-03-25/dlc-models-pytorch/iteration-3/ElevatedMazeMar25-trainset95shuffle3/train/pytorch_config.yaml
+2026-03-26 18:15:02   bodyparts: ['Head', 'Neck', 'Midback', 'Lowerback', 'Tailbase']
+2026-03-26 18:15:02   unique_bodyparts: []
+2026-03-26 18:15:02   individuals: ['animal']
+2026-03-26 18:15:02   with_identity: None
+2026-03-26 18:15:02 method: bu
+2026-03-26 18:15:02 model:
+2026-03-26 18:15:02   backbone:
+2026-03-26 18:15:02     type: ResNet
+2026-03-26 18:15:02     model_name: resnet101
+2026-03-26 18:15:02     output_stride: 16
+2026-03-26 18:15:02     freeze_bn_stats: False
+2026-03-26 18:15:02     freeze_bn_weights: False
+2026-03-26 18:15:02   backbone_output_channels: 2048
+2026-03-26 18:15:02   heads:
+2026-03-26 18:15:02     bodypart:
+2026-03-26 18:15:02       type: HeatmapHead
+2026-03-26 18:15:02       weight_init: normal
+2026-03-26 18:15:02       predictor:
+2026-03-26 18:15:02         type: HeatmapPredictor
+2026-03-26 18:15:02         apply_sigmoid: False
+2026-03-26 18:15:02         clip_scores: True
+2026-03-26 18:15:02         location_refinement: True
+2026-03-26 18:15:02         locref_std: 7.2801
+2026-03-26 18:15:02       target_generator:
+2026-03-26 18:15:02         type: HeatmapGaussianGenerator
+2026-03-26 18:15:02         num_heatmaps: 5
+2026-03-26 18:15:02         pos_dist_thresh: 17
+2026-03-26 18:15:02         heatmap_mode: KEYPOINT
+2026-03-26 18:15:02         gradient_masking: False
+2026-03-26 18:15:02         generate_locref: True
+2026-03-26 18:15:02         locref_std: 7.2801
+2026-03-26 18:15:02       criterion:
+2026-03-26 18:15:02         heatmap:
+2026-03-26 18:15:02           type: WeightedMSECriterion
+2026-03-26 18:15:02           weight: 1.0
+2026-03-26 18:15:02         locref:
+2026-03-26 18:15:02           type: WeightedHuberCriterion
+2026-03-26 18:15:02           weight: 0.05
+2026-03-26 18:15:02       heatmap_config:
+2026-03-26 18:15:02         channels: [2048, 5]
+2026-03-26 18:15:02         kernel_size: [3]
+2026-03-26 18:15:02         strides: [2]
+2026-03-26 18:15:02       locref_config:
+2026-03-26 18:15:02         channels: [2048, 10]
+2026-03-26 18:15:02         kernel_size: [3]
+2026-03-26 18:15:02         strides: [2]
+2026-03-26 18:15:02 net_type: resnet_101
+2026-03-26 18:15:02 runner:
+2026-03-26 18:15:02   type: PoseTrainingRunner
+2026-03-26 18:15:02   gpus: None
+2026-03-26 18:15:02   key_metric: test.mAP
+2026-03-26 18:15:02   key_metric_asc: True
+2026-03-26 18:15:02   eval_interval: 10
+2026-03-26 18:15:02   optimizer:
+2026-03-26 18:15:02     type: AdamW
+2026-03-26 18:15:02     params:
+2026-03-26 18:15:02       lr: 0.0005
+2026-03-26 18:15:02   scheduler:
+2026-03-26 18:15:02     type: LRListScheduler
+2026-03-26 18:15:02     params:
+2026-03-26 18:15:02       lr_list: [[0.0001], [1e-05]]
+2026-03-26 18:15:02       milestones: [90, 120]
+2026-03-26 18:15:02   snapshots:
+2026-03-26 18:15:02     max_snapshots: 5
+2026-03-26 18:15:02     save_epochs: 5
+2026-03-26 18:15:02     save_optimizer_state: False
+2026-03-26 18:15:02 train_settings:
+2026-03-26 18:15:02   batch_size: 8
+2026-03-26 18:15:02   dataloader_workers: 0
+2026-03-26 18:15:02   dataloader_pin_memory: False
+2026-03-26 18:15:02   display_iters: 100
+2026-03-26 18:15:02   epochs: 200
+2026-03-26 18:15:02   seed: 42
+2026-03-26 18:15:04 Data Transforms:
+2026-03-26 18:15:04   Training:   Compose([
+  Affine(always_apply=False, p=0.5, interpolation=1, mask_interpolation=0, cval=0, mode=0, scale={'x': (0.5, 1.25), 'y': (0.5, 1.25)}, translate_percent=None, translate_px={'x': (0, 0), 'y': (0, 0)}, rotate=(-30, 30), fit_output=False, shear={'x': (0.0, 0.0), 'y': (0.0, 0.0)}, cval_mask=0, keep_ratio=True, rotate_method='largest_box'),
+  PadIfNeeded(always_apply=True, p=1.0, min_height=448, min_width=448, pad_height_divisor=None, pad_width_divisor=None, position=PositionType.CENTER, border_mode=0, value=None, mask_value=None),
+  KeypointAwareCrop(always_apply=True, p=1.0, width=448, height=448, max_shift=0.1, crop_sampling='hybrid'),
+  MotionBlur(always_apply=False, p=0.5, blur_limit=(3, 7), allow_shifted=True),
+  GaussNoise(always_apply=False, p=0.5, var_limit=(0, 162.5625), per_channel=True, mean=0),
+  Normalize(always_apply=False, p=1.0, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], max_pixel_value=255.0),
+], p=1.0, bbox_params={'format': 'coco', 'label_fields': ['bbox_labels'], 'min_area': 0.0, 'min_visibility': 0.0, 'min_width': 0.0, 'min_height': 0.0, 'check_each_transform': True}, keypoint_params={'format': 'xy', 'label_fields': ['class_labels'], 'remove_invisible': False, 'angle_in_degrees': True, 'check_each_transform': True}, additional_targets={}, is_check_shapes=True)
+2026-03-26 18:15:04   Validation: Compose([
+  Normalize(always_apply=False, p=1.0, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], max_pixel_value=255.0),
+], p=1.0, bbox_params={'format': 'coco', 'label_fields': ['bbox_labels'], 'min_area': 0.0, 'min_visibility': 0.0, 'min_width': 0.0, 'min_height': 0.0, 'check_each_transform': True}, keypoint_params={'format': 'xy', 'label_fields': ['class_labels'], 'remove_invisible': False, 'angle_in_degrees': True, 'check_each_transform': True}, additional_targets={}, is_check_shapes=True)
+2026-03-26 18:15:07 Using 327 images and 18 for testing
+2026-03-26 18:15:07 
+Starting pose model training...
+--------------------------------------------------
+2026-03-26 18:15:18 Epoch 441/640 (lr=1e-05), train loss 0.00341, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:15:28 Epoch 442/640 (lr=1e-05), train loss 0.00335, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:15:38 Epoch 443/640 (lr=1e-05), train loss 0.00336, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:15:47 Epoch 444/640 (lr=1e-05), train loss 0.00338, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:15:58 Epoch 445/640 (lr=1e-05), train loss 0.00316, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:16:08 Epoch 446/640 (lr=1e-05), train loss 0.00289, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:16:18 Epoch 447/640 (lr=1e-05), train loss 0.00331, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:16:28 Epoch 448/640 (lr=1e-05), train loss 0.00298, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:16:38 Epoch 449/640 (lr=1e-05), train loss 0.00313, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:16:48 Training for epoch 450 done, starting evaluation
+2026-03-26 18:16:49 Epoch 450/640 (lr=1e-05), train loss 0.00347, valid loss 0.00200, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:16:49 Model performance:
+2026-03-26 18:16:49   metrics/test.rmse:          30.96
+2026-03-26 18:16:49   metrics/test.rmse_pcutoff:   0.61
+2026-03-26 18:16:49   metrics/test.mAP:           58.80
+2026-03-26 18:16:49   metrics/test.mAR:           64.44
+2026-03-26 18:16:59 Epoch 451/640 (lr=1e-05), train loss 0.00319, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:17:09 Epoch 452/640 (lr=1e-05), train loss 0.00310, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:17:19 Epoch 453/640 (lr=1e-05), train loss 0.00310, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:17:29 Epoch 454/640 (lr=1e-05), train loss 0.00329, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:17:39 Epoch 455/640 (lr=1e-05), train loss 0.00335, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:17:50 Epoch 456/640 (lr=1e-05), train loss 0.00326, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:17:59 Epoch 457/640 (lr=1e-05), train loss 0.00322, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:18:09 Epoch 458/640 (lr=1e-05), train loss 0.00317, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:18:19 Epoch 459/640 (lr=1e-05), train loss 0.00324, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:18:29 Training for epoch 460 done, starting evaluation
+2026-03-26 18:18:30 Epoch 460/640 (lr=1e-05), train loss 0.00312, valid loss 0.00190, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:18:30 Model performance:
+2026-03-26 18:18:30   metrics/test.rmse:          27.96
+2026-03-26 18:18:30   metrics/test.rmse_pcutoff:   0.53
+2026-03-26 18:18:30   metrics/test.mAP:           63.12
+2026-03-26 18:18:30   metrics/test.mAR:           67.78
+2026-03-26 18:18:40 Epoch 461/640 (lr=1e-05), train loss 0.00303, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:18:49 Epoch 462/640 (lr=1e-05), train loss 0.00308, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:18:59 Epoch 463/640 (lr=1e-05), train loss 0.00327, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:19:09 Epoch 464/640 (lr=1e-05), train loss 0.00312, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:19:19 Epoch 465/640 (lr=1e-05), train loss 0.00279, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:19:29 Epoch 466/640 (lr=1e-05), train loss 0.00289, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:19:39 Epoch 467/640 (lr=1e-05), train loss 0.00273, GPU: 5396.0/81079.8 MiB
+2026-03-26 18:19:49 Epoch 468/640 (lr=1e-05), train loss 0.00310, GPU: 5396.0/81079.8 MiB
