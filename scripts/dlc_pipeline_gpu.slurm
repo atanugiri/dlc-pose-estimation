@@ -27,7 +27,7 @@ export SHUFFLE=3
 export TRAININGSETINDEX=0
 export VIDEOS="$WORK/ElevatedMaze-Atanu-2026-03-25/stitched_video.mp4"
 export SNAPSHOT_PATH="$WORK/ElevatedMaze-Atanu-2026-03-25/dlc-models-pytorch/iteration-3/ElevatedMazeMar25-trainset95shuffle3/train/snapshot-best-790.pt"
-export TASK="evaluate"
+export TASK="evaluate" # Options: train, evaluate, analyze, all
 
 echo "Job started on $(hostname) at $(date)"
 
