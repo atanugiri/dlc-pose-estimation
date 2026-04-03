@@ -53,7 +53,7 @@ colormap: rainbow
 # Training,Evaluation and Analysis configuration
 TrainingFraction:
 - 0.95
-iteration: 3
+iteration: 4
 default_net_type: resnet_101
 default_augmenter: default
 snapshotindex: -1

@@ -29,8 +29,6 @@ echo "Allocated CPUs: $SLURM_CPUS_PER_TASK"
 
 echo "Starting DeepLabCut extract_outlier_frames..."
 python - <<PY
-import os
-print("CPU count visible:", os.cpu_count())
 import builtins
 builtins.input = lambda prompt=None: "yes"
 import deeplabcut
