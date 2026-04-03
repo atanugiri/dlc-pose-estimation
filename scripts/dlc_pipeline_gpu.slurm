@@ -1,51 +1,65 @@
 #!/bin/bash
 #SBATCH --job-name=dlc_gpu
-#SBATCH --output=%x-%j.out
-#SBATCH --error=%x-%j.err
-#SBATCH --partition=dgx       # GPU partition
-#SBATCH --gres=gpu:1          # request 1 GPU only for punakha
+#SBATCH --output=/work/agiri/logs/%x-%j.out
+#SBATCH --error=/work/agiri/logs/%x-%j.err
+#SBATCH --partition=dgx
+#SBATCH --gres=gpu:1
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=6
-#SBATCH --time=0:30:00        # 2 hours for training
+#SBATCH --time=3:00:00
 #SBATCH --mem=16G
 
-# --- Variables ---
-export CONFIG_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/config.yaml"
+set -euo pipefail
+
+mkdir -p "$WORK/logs"
+mkdir -p "$WORK/.cache"
+mkdir -p "$WORK/pip-cache"
+mkdir -p "$WORK/mplconfig"
+mkdir -p "$WORK/tmp"
+mkdir -p "$WORK/home_fake"
+
+export CONFIG_PATH="$WORK/ElevatedMaze-Atanu-2026-03-25/config.yaml"
 export CONDA_ENV="$HOME/miniconda3/envs/DEEPLABCUT"
 export DEVICE="cuda:0"
 export EPOCHS=200
 export SHUFFLE=3
 export TRAININGSETINDEX=0
-# export VIDEOS="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/videos/*.mp4"
-export VIDEOS="$WORK/Black-ChocolateMilk/stitched_video.mp4"
-export SNAPSHOT_PATH="$WORK/DLC-Black-LightOnly-Atanu-2025-12-13/dlc-models-pytorch/iteration-4/\
-DLC-Black-LightOnlyDec13-trainset95shuffle3/train/snapshot-best-590.pt"
-export TASK="train"  # Options: train, evaluate, analyze, all
+export VIDEOS="$WORK/ElevatedMaze-Atanu-2026-03-25/stitched_video.mp4"
+export SNAPSHOT_PATH="$WORK/ElevatedMaze-Atanu-2026-03-25/dlc-models-pytorch/iteration-3/ElevatedMazeMar25-trainset95shuffle3/train/snapshot-best-790.pt"
+export TASK="evaluate"
 
 echo "Job started on $(hostname) at $(date)"
 
-# Initialize environment
-source $HOME/miniconda3/etc/profile.d/conda.sh
+source "$HOME/miniconda3/etc/profile.d/conda.sh"
 conda activate "$CONDA_ENV"
 
-# Control thread usage for OpenMP/MKL
-export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-export MKL_NUM_THREADS=$SLURM_CPUS_PER_TASK
+export PIP_CACHE_DIR="$WORK/pip-cache"
+export XDG_CACHE_HOME="$WORK/.cache"
+export MPLCONFIGDIR="$WORK/mplconfig"
+export TMPDIR="$WORK/tmp"
+export TMP="$WORK/tmp"
+export TEMP="$WORK/tmp"
+export HOME="$WORK/home_fake"
+
+export OMP_NUM_THREADS="$SLURM_CPUS_PER_TASK"
+export MKL_NUM_THREADS="$SLURM_CPUS_PER_TASK"
+
+cd "$WORK/ElevatedMaze-Atanu-2026-03-25"
 
 echo "Using python: $(which python)"
+echo "PWD=$(pwd)"
+echo "HOME=$HOME"
+echo "XDG_CACHE_HOME=$XDG_CACHE_HOME"
+echo "PIP_CACHE_DIR=$PIP_CACHE_DIR"
+echo "TMPDIR=$TMPDIR"
+echo "MPLCONFIGDIR=$MPLCONFIGDIR"
 
-# Check GPU status before task
 echo "GPU status before task:"
 nvidia-smi --query-gpu=index,memory.used,memory.total,utilization.gpu --format=csv,noheader,nounits
 
-# Change to the project directory to ensure outputs are saved correctly
-# cd "$WORK/Black-FoodLight-Atanu-2026-01-15"
-
-# Run DeepLabCut pipeline
 python "$WORK/scripts/dlc_pipeline.py"
 
-# Check GPU status after task
 echo "GPU status after task:"
 nvidia-smi --query-gpu=index,memory.used,memory.total,utilization.gpu --format=csv,noheader,nounits
 
