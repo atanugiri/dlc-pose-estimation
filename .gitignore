@@ -85,3 +85,8 @@ _build/
 # Caches and backup files
 .cache/
 *~
+
+# md files
+DeepLabCut_Installation_Guide.md
+hpc_to_wsl_transfer.md
+preprocessing_steps.md
