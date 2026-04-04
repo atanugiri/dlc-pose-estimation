@@ -110,7 +110,7 @@ def stitch_videos(input_folder, output_folder=None, output_name='stitched_video'
                 "-r", str(target_fps),
                 "-c:v", "libx264",
                 "-preset", "medium",
-                "-crf", "23",  # Good quality (lower = better, 18-28 range)
+                "-crf", "16",  # Good quality (lower = better, 18-28 range)
                 "-pix_fmt", "yuv420p",  # Ensure compatibility
             ])
         
