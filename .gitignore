@@ -34,9 +34,9 @@ snapshots/
 *.mat
 *.zip*
 *.png
-*.tar
 
 # DeepLabCut specific files
+dlc-models-pytorch/
 evaluation-results/
 training-datasets/
 *.yaml.bak
@@ -50,6 +50,7 @@ config.yaml.bak
 *.tar.gz
 *.7z
 *.rar
+*.tar
 
 # macOS
 .DS_Store
