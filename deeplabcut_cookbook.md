@@ -41,15 +41,15 @@ For these steps, it is easiest to use the DeepLabCut GUI:
   - Extract frames for labeling
   - Label frames (and refine labels)
 
-You can also do these steps programmatically if needed:
+You can also do these steps programmatically from ipython:
 
   ```python
   import deeplabcut
   # Create a new project
   config_path = deeplabcut.create_new_project(
     "ProjectName", "Scorer", [video_paths],
-    working_directory="/path/to/projects",
-    copy_videos=True, multianimal=False
+    working_directory="/path/to/projects", # /Users/atanugiri/Downloads/dlc-pose-estimation/
+    copy_videos=False, multianimal=False
   )
   # Add more videos
   deeplabcut.add_new_videos(config_path, [new_video_paths], copy_videos=False, extract_frames=False)
