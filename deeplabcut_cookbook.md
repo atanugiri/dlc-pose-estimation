@@ -65,89 +65,89 @@ You can also do these steps programmatically from ipython:
 
 ## Creating Training Dataset
 - Merge labels and create splits:
-  ```python
-  deeplabcut.merge_datasets(config_path)
-  ```
-  Recommended: Use IPython for creating the training dataset (better for debugging and interactive work):
+```python
+deeplabcut.merge_datasets(config_path)
+```
+Recommended: Use IPython for creating the training dataset (better for debugging and interactive work):
 
-  1. Activate your environment:
-    ```bash
-    conda activate DEEPLABCUT
-    ipython
-    ```
-  2. In IPython:
-    ```python
-    import deeplabcut
-    from pathlib import Path
-    config_path = str(Path("config.yaml").resolve())
-    deeplabcut.create_training_dataset(config_path, num_shuffles=3)
-    ```
+1. Activate your environment:
+```bash
+conda activate DEEPLABCUT
+ipython
+```
+2. In ipython:
+```python
+import deeplabcut
+from pathlib import Path
+config_path = str(Path("config.yaml").resolve())
+deeplabcut.create_training_dataset(config_path, num_shuffles=3)
+```
 
 ## Training the Network
 - Train the model:
-  ```python
-  deeplabcut.train_network(
-      config_path, shuffle=1, trainingsetindex=0,
-      device="cuda:0", epochs=500, batch_size=8,
-      snapshot_path="path/to/init/model.pt"  # Optional transfer learning
-  )
-  ```
+```python
+deeplabcut.train_network(
+    config_path, shuffle=1, trainingsetindex=0,
+    device="cuda:0", epochs=500, batch_size=8,
+    snapshot_path="path/to/init/model.pt"  # Optional transfer learning
+)
+```
 - **Model Selection**: Use ResNet-101 or ResNet-152 for complex data (occlusions, low contrast) instead of ResNet-50. Larger models improve accuracy but require more GPU memory/time.
 - **Transfer Learning**: For multiple shuffles, train shuffle 1 from scratch, then use shuffle 1's best snapshot as `snapshot_path` for shuffle 2, and so on. This speeds up convergence and boosts performance.
 
 ## Evaluating the Model
 - Evaluate on test set:
-  ```python
-  deeplabcut.evaluate_network(config_path, Shuffles=[1], plotting=True)
-  ```
+```python
+deeplabcut.evaluate_network(config_path, Shuffles=[1], plotting=True)
+```
 - Check metrics: RMSE <2 pixels and mAP >80% indicate excellent performance. mAP >85% is outstanding.
 - **Multiple Shuffles**: For robustness, create and evaluate multiple shuffles.
-  ```python
-  deeplabcut.create_training_dataset(config_path, num_shuffles=3)  # Shuffles 1,2,3
-  # Train each shuffle separately (update SHUFFLE in script)
-  deeplabcut.evaluate_network(config_path, Shuffles=[1,2,3], plotting=True)
-  ```
-  - Compare metrics across shuffles for uniformity. If one shuffle has much lower mAP (e.g., <50%), it may be overfitting—consider retraining with more data or active learning.
+```python
+deeplabcut.create_training_dataset(config_path, num_shuffles=3)  # Shuffles 1,2,3
+# Train each shuffle separately (update SHUFFLE in script)
+deeplabcut.evaluate_network(config_path, Shuffles=[1,2,3], plotting=True)
+```
+- Compare metrics across shuffles for uniformity. If one shuffle has much lower mAP (e.g., <50%), it may be overfitting—consider retraining with more data or active learning.
 
 ## Analyzing Videos
 - Predict poses on new videos:
-  ```python
-  deeplabcut.analyze_videos(config_path, [video_paths], shuffle=1, gputouse="cuda:0", save_as_csv=True)
-  ```
+```python
+deeplabcut.analyze_videos(config_path, [video_paths], shuffle=1, gputouse="cuda:0", save_as_csv=True)
+```
 
 ## Filtering Predictions
 - Smooth predictions:
-  ```python
-  deeplabcut.filterpredictions(config_path, [video_paths], shuffle=1, filtertype='median', p_bound=0.05)
-  ```
+```python
+deeplabcut.filterpredictions(config_path, [video_paths], shuffle=1, filtertype='median', p_bound=0.05)
+```
 
 ## Adding or Modifying Bodyparts
 If you need to add more bodyparts (e.g., tail segments, limbs) after initial setup:
 
 1. **Edit `config.yaml`**: Add new bodyparts under `bodyparts:` and update `skeleton:` for connections.
 2. **Relabel Specific Frames**: Label only the relevant videos/folders for the new bodyparts.
-   ```python
-   deeplabcut.label_frames(config_path, videos=["path/to/labeled-data/folder/"])
-   ```
+  ```python
+  deeplabcut.label_frames(config_path, videos=["path/to/labeled-data/folder/"])
+  ```
 3. **Merge and Retrain**:
-   ```python
-   deeplabcut.merge_datasets(config_path)
-   deeplabcut.create_training_dataset(config_path, num_shuffles=3)
-   # Retrain shuffles as needed
-   ```
+  ```python
+  deeplabcut.merge_datasets(config_path)
+  deeplabcut.create_training_dataset(config_path, num_shuffles=3)
+  # Retrain shuffles as needed
+  ```
 
 ## Active Learning (Outliers)
 Active learning is used to improve model performance by identifying and labeling frames where the model is uncertain. Use this after initial training and evaluation if metrics are poor (e.g., RMSE >5 pixels, mAP <80%). This typically happens after the first round of training, evaluation, and analysis on videos. If the model's predictions are inaccurate or inconsistent, extract outliers, label them, and retrain. If mAP is already >80%, active learning is optional but can push accuracy higher.
 
 **Tip:** For labeling outlier frames, using `deeplabcut.label_frames` with the GUI is often easier and more user-friendly than `refine_labels`.
 
-  ```python
-  deeplabcut.extract_outlier_frames(config_path, [video_paths], outlieralgorithm='uncertain', p_bound=0.1) # use judgement for p_bound
-  deeplabcut.refine_labels(config_path)  # Label outliers
-  deeplabcut.merge_datasets(config_path)
-  deeplabcut.create_training_dataset(config_path)
-  # Retrain
-  ```
+```python
+deeplabcut.extract_outlier_frames(config_path, [video_paths], outlieralgorithm='uncertain', p_bound=0.1) # use judgement for p_bound
+deeplabcut.refine_labels(config_path)  # Label outliers
+deeplabcut.merge_datasets(config_path)
+deeplabcut.create_training_dataset(config_path)
+# Retrain
+```
 ## Lesson: Using extract_outlier_frames Across Projects
 
 ### Key Points

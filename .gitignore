@@ -34,6 +34,7 @@ snapshots/
 *.mat
 *.zip*
 *.png
+*.tar
 
 # DeepLabCut specific files
 evaluation-results/
