@@ -7,7 +7,8 @@ identity:
 
 
 # Project path (change when moving around)
-project_path: /work/agiri/ElevatedMazeFood-Atanu-2026-04-04
+project_path: 
+  /work/agiri/ElevatedMazeFood-Atanu-2026-04-04
 
 
 # Default DeepLabCut engine to use for shuffle creation (either pytorch or tensorflow)
@@ -83,6 +84,12 @@ bodyparts:
 
 
 # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
 start: 0
 stop: 1
 numframes2pick: 10
@@ -108,7 +115,7 @@ colormap: rainbow
 # Training,Evaluation and Analysis configuration
 TrainingFraction:
 - 0.95
-iteration: 0
+iteration: 1
 default_net_type: resnet_101
 default_augmenter: default
 snapshotindex: -1
