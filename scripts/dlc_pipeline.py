@@ -22,7 +22,7 @@ def do_train(config, shuffle, trainingsetindex, device, epochs, snapshot_path):
         shuffle=shuffle,
         trainingsetindex=trainingsetindex,
         device=device,
-        max_snapshots_to_keep=5,
+        max_snapshots_to_keep=1,
         displayiters=100,
         save_epochs=5,
         epochs=epochs,
@@ -40,7 +40,7 @@ def do_evaluate(config, shuffles, trainingsetindex, device):
         Shuffles=shuffles,
         trainingsetindex=trainingsetindex,
         device=device,
-        plotting=True
+        plotting=False
     )
     nvidia_status("after evaluate")
     print("Completed evaluate:", time.asctime())
@@ -99,15 +99,20 @@ def main():
     if not videos_pattern:
         print("No VIDEOS pattern provided in environment variable VIDEOS")
         sys.exit(1)
-    matches = glob.glob(videos_pattern)
-    videos = sorted([str(Path(p)) for p in matches])
+    # If user provided multiple paths, use them directly
+    if " " in videos_pattern:
+        videos = [str(Path(p)) for p in videos_pattern.split()]
+    else:
+        # fallback to glob pattern
+        matches = glob.glob(videos_pattern)
+        videos = sorted([str(Path(p)) for p in matches])
     if not videos:
         print(f"No videos found at: {videos_pattern}")
         sys.exit(1)
 
     # For testing: limit to first 2 videos (comment out for full run)
-    # selected_indices = list(range(5))  # Example indices
-    # videos = [videos[i] for i in selected_indices]
+    selected_indices = [3,5,7]  #list(range(3))  # Example indices
+    videos = [videos[i] for i in selected_indices]
     
     print(f"Found {len(videos)} videos")
     
@@ -118,7 +123,7 @@ def main():
 
         if task == "all":
             do_analyze(config_arg, videos, shuffle, trainingsetindex, device)
-            # do_filter(config_path, videos, shuffle)
+           #  do_filter(config_path, videos, shuffle)
             do_label(config_arg, videos, shuffle)
         elif task == "train":
             do_train(config_arg, shuffle, trainingsetindex, device, epochs, snapshot_arg)

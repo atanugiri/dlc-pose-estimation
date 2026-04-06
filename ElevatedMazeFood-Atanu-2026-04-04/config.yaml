@@ -39,6 +39,28 @@ video_sets:
     crop: 0, 424, 0, 336
   /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_08_26_24_Y_Orange.mp4:
     crop: 0, 424, 0, 336
+  /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_09_02_24_P_Cyan.mp4:
+    crop: 0, 424, 0, 336
+  /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_09_02_24_P_Orange.mp4:
+    crop: 0, 424, 0, 336
+  /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_09_02_24_Y_Azul.mp4:
+    crop: 0, 424, 0, 336
+  /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_09_02_24_Y_Navy.mp4:
+    crop: 0, 424, 0, 336
+  /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_09_02_24_Y_Tan.mp4:
+    crop: 0, 424, 0, 336
+  /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_09_02_24_Y_Teal.mp4:
+    crop: 0, 424, 0, 336
+  /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_09_03_24_P_Indigo.mp4:
+    crop: 0, 424, 0, 336
+  /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_09_03_24_P_Lilac.mp4:
+    crop: 0, 424, 0, 336
+  /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_09_03_24_Y_Pinky.mp4:
+    crop: 0, 424, 0, 336
+  /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_09_03_24_Y_Sage.mp4:
+    crop: 0, 424, 0, 336
+  /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_09_03_24_Y_Sky.mp4:
+    crop: 0, 424, 0, 336
 bodyparts:
 - Head
 - Neck
@@ -48,51 +70,9 @@ bodyparts:
 
 
 # Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
-
-
-# Fraction of video to start/stop when extracting frames for labeling/refinement
 start: 0
 stop: 1
-numframes2pick: 10
+numframes2pick: 5
 
 
 # Plotting configuration
@@ -115,7 +95,7 @@ colormap: rainbow
 # Training,Evaluation and Analysis configuration
 TrainingFraction:
 - 0.95
-iteration: 1
+iteration: 2
 default_net_type: resnet_101
 default_augmenter: default
 snapshotindex: -1
