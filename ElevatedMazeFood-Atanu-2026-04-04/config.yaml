@@ -7,8 +7,7 @@ identity:
 
 
 # Project path (change when moving around)
-project_path: 
-  /work/agiri/ElevatedMazeFood-Atanu-2026-04-04
+project_path: /work/agiri/ElevatedMazeFood-Atanu-2026-04-04
 
 
 # Default DeepLabCut engine to use for shuffle creation (either pytorch or tensorflow)
@@ -17,11 +16,11 @@ engine: pytorch
 
 # Annotation data set configuration (and individual video cropping parameters)
 video_sets:
-  /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_08_27_24_P_Sage.mp4: 
+  /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_08_27_24_P_Sage.mp4:
     crop: 0, 424, 0, 336
   /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_08_27_24_P_Pinky.mp4:
     crop: 0, 424, 0, 336
-  /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_08_27_24_Y_Lilac.mp4: 
+  /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_08_27_24_Y_Lilac.mp4:
     crop: 0, 424, 0, 336
   /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_08_26_24_P_Azul.mp4:
     crop: 0, 424, 0, 336
@@ -39,13 +38,45 @@ video_sets:
     crop: 0, 424, 0, 336
   /work/agiri/ElevatedMazeFood-Atanu-2026-04-04/videos/ElevatedMazeFood_08_26_24_Y_Orange.mp4:
     crop: 0, 424, 0, 336
-
 bodyparts:
 - Head
 - Neck
 - Midback
 - Lowerback
 - Tailbase
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
 
 
 # Fraction of video to start/stop when extracting frames for labeling/refinement
@@ -69,7 +100,7 @@ skeleton:
   - Tailbase
 skeleton_color: black
 pcutoff: 0.6
-dotsize: 12
+dotsize: 6
 alphavalue: 0.7
 colormap: rainbow
 

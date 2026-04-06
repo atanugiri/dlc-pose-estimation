@@ -3,7 +3,7 @@
 #SBATCH --output=/work/agiri/logs/%x-%j.out
 #SBATCH --error=/work/agiri/logs/%x-%j.err
 #SBATCH --partition=dgx         # dgx partition; no GPU requested
-#SBATCH --time=03:00:00
+#SBATCH --time=01:00:00
 #SBATCH --cpus-per-task=12
 #SBATCH --mem=16G
 
@@ -13,8 +13,8 @@ mkdir -p "$WORK/logs" "$WORK/.cache" "$WORK/pip-cache" "$WORK/mplconfig" "$WORK/
 
 # Edit these if needed
 CONDA_ENV=DEEPLABCUT
-CONFIG_PATH="${WORK}/ElevatedMaze-Atanu-2026-03-25/config.yaml"
-VIDEO="${WORK}/ElevatedMaze-Atanu-2026-03-25/stitched_video.mp4"
+CONFIG_PATH="${WORK}/ElevatedMazeFood-Atanu-2026-04-04/config.yaml"
+VIDEO_PATTERN="${WORK}/ElevatedMazeFood-Atanu-2026-04-04/videos/*08*.mp4"
 
 # Activate conda
 source /home/agiri/miniconda3/etc/profile.d/conda.sh
@@ -31,9 +31,13 @@ echo "Starting DeepLabCut extract_outlier_frames..."
 python - <<PY
 import builtins
 builtins.input = lambda prompt=None: "yes"
+
+from glob import glob
 import deeplabcut
+
 config = "${CONFIG_PATH}"
-videos = ["${VIDEO}"]
+pattern = "${VIDEO_PATTERN}"
+videos = sorted(glob(pattern))
 print('Config:', config)
 print('Videos:', videos)
 deeplabcut.extract_outlier_frames(config, videos, shuffle=3)
