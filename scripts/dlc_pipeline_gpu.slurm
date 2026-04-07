@@ -7,7 +7,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=6
-#SBATCH --time=3:00:00
+#SBATCH --time=2:00:00
 #SBATCH --mem=16G
 
 set -euo pipefail
@@ -19,15 +19,17 @@ mkdir -p "$WORK/mplconfig"
 mkdir -p "$WORK/tmp"
 mkdir -p "$WORK/home_fake"
 
-export CONFIG_PATH="$WORK/ElevatedMaze-Atanu-2026-03-25/config.yaml"
+export CONFIG_PATH="$WORK/ElevatedMazeFood-Atanu-2026-04-04/config.yaml"
 export CONDA_ENV="$HOME/miniconda3/envs/DEEPLABCUT"
 export DEVICE="cuda:0"
 export EPOCHS=200
 export SHUFFLE=3
 export TRAININGSETINDEX=0
-export VIDEOS="$WORK/ElevatedMaze-Atanu-2026-03-25/stitched_video.mp4"
-export SNAPSHOT_PATH="$WORK/ElevatedMaze-Atanu-2026-03-25/dlc-models-pytorch/iteration-3/ElevatedMazeMar25-trainset95shuffle3/train/snapshot-best-790.pt"
-export TASK="evaluate" # Options: train, evaluate, analyze, all
+#export VIDEOS="$WORK/ElevatedMazeFood-Atanu-2026-04-04/videos/*.mp4"
+export VIDEOS="$WORK/ElevatedMaze/videos/ElevatedMaze_09_19_23_Y_GammaRay.mp4 \
+$WORK/ElevatedMaze/videos/ElevatedMaze_09_19_23_Y_ShatteredBackboard.mp4"
+export SNAPSHOT_PATH="$WORK/ElevatedMazeFood-Atanu-2026-04-04/dlc-models-pytorch/iteration-2/ElevatedMazeFoodApr4-trainset95shuffle3/train/snapshot-best-1070.pt"
+export TASK="all" # Options: train, evaluate, analyze, all
 
 echo "Job started on $(hostname) at $(date)"
 
@@ -45,7 +47,7 @@ export HOME="$WORK/home_fake"
 export OMP_NUM_THREADS="$SLURM_CPUS_PER_TASK"
 export MKL_NUM_THREADS="$SLURM_CPUS_PER_TASK"
 
-cd "$WORK/ElevatedMaze-Atanu-2026-03-25"
+cd "$WORK/ElevatedMazeFood-Atanu-2026-04-04"
 
 echo "Using python: $(which python)"
 echo "PWD=$(pwd)"

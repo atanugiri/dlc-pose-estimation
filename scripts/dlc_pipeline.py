@@ -7,16 +7,8 @@ import os
 import glob
 from pathlib import Path
 
-def nvidia_status(label):
-    print(f"=== NVIDIA SMI: {label} ===")
-    try:
-        subprocess.call("nvidia-smi --query-gpu=index,memory.used,memory.total,utilization.gpu --format=csv,noheader,nounits", shell=True)
-    except Exception as e:
-        print("nvidia-smi failed:", e)
-
 def do_train(config, shuffle, trainingsetindex, device, epochs, snapshot_path):
     print("Starting train:", time.asctime())
-    nvidia_status("before train")
     deeplabcut.train_network(
         config,
         shuffle=shuffle,
@@ -29,12 +21,10 @@ def do_train(config, shuffle, trainingsetindex, device, epochs, snapshot_path):
         batch_size=8,
         snapshot_path=snapshot_path
     )
-    nvidia_status("after train")
     print("Completed train:", time.asctime())
 
 def do_evaluate(config, shuffles, trainingsetindex, device):
     print("Starting evaluate:", time.asctime())
-    nvidia_status("before evaluate")
     deeplabcut.evaluate_network(
         config,
         Shuffles=shuffles,
@@ -42,12 +32,10 @@ def do_evaluate(config, shuffles, trainingsetindex, device):
         device=device,
         plotting=False
     )
-    nvidia_status("after evaluate")
     print("Completed evaluate:", time.asctime())
 
 def do_analyze(config, videos, shuffle, trainingsetindex, device):
     print("Starting analyze:", time.asctime())
-    nvidia_status("before analyze")
     deeplabcut.analyze_videos(
         config,
         videos=videos,
@@ -56,24 +44,20 @@ def do_analyze(config, videos, shuffle, trainingsetindex, device):
         device=device,
         in_random_order=False
     )
-    nvidia_status("after analyze")
     print("Completed analyze:", time.asctime())
 
 def do_filter(config, videos, shuffle):
     print("Starting filter:", time.asctime())
-    nvidia_status("before filter")
     deeplabcut.filterpredictions(
         config=config,
         video=videos,
         shuffle=shuffle,
         save_as_csv=False
     )
-    nvidia_status("after filter")
     print("Completed filter:", time.asctime())
 
 def do_label(config, videos, shuffle):
     print("Starting label_video:", time.asctime())
-    nvidia_status("before label_video")
     deeplabcut.create_labeled_video(
         config=config,
         videos=videos,
@@ -81,7 +65,6 @@ def do_label(config, videos, shuffle):
         filtered=False,
         pcutoff=0.3
     )
-    nvidia_status("after label_video")
     print("Completed label_video:", time.asctime())
 
 def main():
@@ -111,8 +94,8 @@ def main():
         sys.exit(1)
 
     # For testing: limit to first 2 videos (comment out for full run)
-    selected_indices = [3,5,7]  #list(range(3))  # Example indices
-    videos = [videos[i] for i in selected_indices]
+    # selected_indices = [3,5,7]  #list(range(3))  # Example indices
+    # videos = [videos[i] for i in selected_indices]
     
     print(f"Found {len(videos)} videos")
     
