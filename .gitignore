@@ -89,6 +89,7 @@ _build/
 *~
 
 # md files
-DeepLabCut_Installation_Guide.md
+deeplabcut_cookbook.md
+deepLabCut_Installation_Guide.md
 hpc_to_wsl_transfer.md
 preprocessing_steps.md
