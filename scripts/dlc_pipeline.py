@@ -82,20 +82,22 @@ def main():
     if not videos_pattern:
         print("No VIDEOS pattern provided in environment variable VIDEOS")
         sys.exit(1)
-    # If user provided multiple paths, use them directly
+    # If user provided multiple paths, use them directly (sort by filename)
     if " " in videos_pattern:
-        videos = [str(Path(p)) for p in videos_pattern.split()]
+        paths = [Path(p) for p in videos_pattern.split()]
+        videos = [str(p) for p in sorted(paths, key=lambda p: p.name)]
     else:
-        # fallback to glob pattern
+        # fallback to glob pattern (expand pattern then sort by filename)
         matches = glob.glob(videos_pattern)
-        videos = sorted([str(Path(p)) for p in matches])
+        paths = [Path(p) for p in matches]
+        videos = [str(p) for p in sorted(paths, key=lambda p: p.name)]
     if not videos:
         print(f"No videos found at: {videos_pattern}")
         sys.exit(1)
 
     # For testing: limit to first 2 videos (comment out for full run)
-    # selected_indices = [3,5,7]  #list(range(3))  # Example indices
-    # videos = [videos[i] for i in selected_indices]
+    selected_indices = list(range(10))  # Example indices
+    videos = [videos[i] for i in selected_indices]
     
     print(f"Found {len(videos)} videos")
     
