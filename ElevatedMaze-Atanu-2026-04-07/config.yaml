@@ -8,7 +8,7 @@ identity:
 
 # Project path (change when moving around)
 project_path: 
-  /Users/atanugiri/Downloads/dlc-pose-estimation/ElevatedMaze-Atanu-2026-04-07
+  /work/agiri/ElevatedMaze-Atanu-2026-04-07
 
 
 # Default DeepLabCut engine to use for shuffle creation (either pytorch or tensorflow)
@@ -17,7 +17,25 @@ engine: pytorch
 
 # Annotation data set configuration (and individual video cropping parameters)
 video_sets:
-  /Users/atanugiri/Downloads/dlc-pose-estimation/ElevatedMaze-Atanu-2026-04-07/videos/ElevatedMaze_09_19_23_Y_GammaRay.mp4:
+  /work/agiri/ElevatedMaze-Atanu-2026-04-07/videos/ElevatedMaze_09_19_23_Y_GammaRay.mp4:
+    crop: 0, 252, 0, 252
+  /work/agiri/ElevatedMaze-Atanu-2026-04-07/videos/ElevatedMaze_09_19_23_Y_ShatteredBackboard.mp4:
+    crop: 0, 252, 0, 252
+  /work/agiri/ElevatedMaze-Atanu-2026-04-07/videos/ElevatedMaze_09_21_23_Y_ChicagoBred.mp4:
+    crop: 0, 252, 0, 252
+  /work/agiri/ElevatedMaze-Atanu-2026-04-07/videos/ElevatedMaze_09_21_23_Y_Concord.mp4:
+    crop: 0, 252, 0, 252
+  /work/agiri/ElevatedMaze-Atanu-2026-04-07/videos/ElevatedMaze_09_21_23_Y_CrimsonTint.mp4:
+    crop: 0, 252, 0, 252
+  /work/agiri/ElevatedMaze-Atanu-2026-04-07/videos/ElevatedMaze_09_21_23_Y_Infared.mp4:
+    crop: 0, 252, 0, 252
+  /work/agiri/ElevatedMaze-Atanu-2026-04-07/videos/ElevatedMaze_09_21_23_Y_SpaceJam.mp4:
+    crop: 0, 252, 0, 252
+  /work/agiri/ElevatedMaze-Atanu-2026-04-07/videos/ElevatedMaze_09_21_23_Y_UniversityBlue.mp4:
+    crop: 0, 252, 0, 252
+  /work/agiri/ElevatedMaze-Atanu-2026-04-07/videos/ElevatedMaze_09_26_23_P_Chai.mp4:
+    crop: 0, 252, 0, 252
+  /work/agiri/ElevatedMaze-Atanu-2026-04-07/videos/ElevatedMaze_09_26_23_P_Chupacabra.mp4:
     crop: 0, 252, 0, 252
 bodyparts:
 - Head
